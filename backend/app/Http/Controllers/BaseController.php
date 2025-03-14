@@ -5,9 +5,9 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as Controller;
 
-class BaseController extends Controller
+ class BaseController extends Controller
 {
-    /**
+    /**  d
      * success response method.
      *
      * @return \Illuminate\Http\Response
