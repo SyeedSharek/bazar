@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatecategoryRequest;
 use App\Models\Category;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -24,17 +25,29 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(StorecategoryRequest $request)
+    // {
+    //     $image = $this->uploadImage(request: $request, directory: 'categories');
+    //     return $image;
+    //     Category::create($request->validated() + ['image' => $image]);
+    //     return Response::created();
+    // }
     public function store(StorecategoryRequest $request)
     {
+        // Upload the image
         $image = $this->uploadImage(request: $request, directory: 'categories');
-        return $image;
-        Category::create($request->validated() + ['image' => $image]);
-        return Response::created();
+
+        // Create the category with the uploaded image path
+        $category = Category::create($request->validated() + ['image' => $image]);
+
+        // Return a success response
+        return response()->json([
+            'status' => true,
+            'message' => 'Category created successfully',
+            'data' => $category,
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
