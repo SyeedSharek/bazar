@@ -18,7 +18,7 @@ export default function Login() {
               <div className="flex w-full border-b-2  focus:outline-none focus:border-blue-500">
 
               <div>
-              <UserIcon />
+              <UserIcon /> 
 
                 </div>
 
@@ -35,11 +35,28 @@ export default function Login() {
               </div>
             </div>
 
-            <div>
-              <label className="text-[22px]" htmlFor="password">
-                Password
+            <div className="mt-[10%] mb-4 ">
+              <label className="text-[22px] mb-3 block" htmlFor="email">
+                Email
               </label>
-              <input type="password" name="password" id="" />
+              <div className="flex w-full border-b-2  focus:outline-none focus:border-blue-500">
+
+              <div>
+              <UserIcon /> 
+
+                </div>
+
+                <div>
+                  <input
+                    className=""
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder=" Enter your email"
+                  />
+                </div>
+               
+              </div>
             </div>
           </form>
         </div>
