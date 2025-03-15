@@ -29,12 +29,13 @@ class StorecategoryRequest extends FormRequest
             'description' => 'nullable|min:5',
         ];
     }
+
     public function failedValidation(Validation $validator)
     {
         throw new HttpResponseException(response()->json([
-            'status'   => false,
-            'message'   => 'Validation errors',
-            'errors'      => $validator->errors()
+            'status' => false,
+            'message' => 'Validation errors',
+            'errors' => $validator->errors()
         ], 400));
     }
 }

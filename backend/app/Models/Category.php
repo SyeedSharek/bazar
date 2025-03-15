@@ -14,6 +14,7 @@ class Category extends Model
         'image',
         'status'
     ];
+
     protected function casts(): array
     {
         return [
@@ -21,9 +22,14 @@ class Category extends Model
         ];
     }
 
-    public function setTitleAttribute($value)
+    /**
+     * Automatically generate the slug from the name attribute.
+     *
+     * @param string $value
+     */
+    public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
-        $this->attributes['slug'] = Str::slug($value);
+        $this->attributes['slug'] = Str::slug($value); // Generate slug from the name
     }
 }

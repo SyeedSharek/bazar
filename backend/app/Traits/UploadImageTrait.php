@@ -5,7 +5,7 @@ namespace App\Traits;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Imagick\Driver;
+use Intervention\Image\Drivers\Gd\Driver; // Add this line
 use Illuminate\Http\UploadedFile;
 
 trait UploadImageTrait
@@ -73,15 +73,19 @@ trait UploadImageTrait
             Storage::disk('public')->delete($existingFilePath);
         }
 
+        // Ensure the directory exists
+        if (!Storage::disk('public')->exists($directory)) {
+            Storage::disk('public')->makeDirectory($directory);
+        }
+
         // Generate unique filename
         $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension();
         $path = "{$directory}/{$fileName}";
 
-        // Process and save the image
-        $manager = new ImageManager(Driver::class);
-        $image = $manager->read($file);
-        $image->save(storage_path("app/public/{$path}"), progressive: true, quality: 50);
-
+        // Initialize ImageManager with the GD driver
+        $manager = new ImageManager(new Driver()); // Use the GD driver
+        $image = $manager->read($file); // This creates the image instance
+        $image->save(storage_path("app/public/{$path}"), 50); // Adjust quality as needed
 
         return $path;
     }
