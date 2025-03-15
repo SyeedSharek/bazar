@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('image');
-            $table->string('status');
+            $table->string('status')->default(true);
             $table->timestamps();
         });
     }
