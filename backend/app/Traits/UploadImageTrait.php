@@ -67,25 +67,17 @@ trait UploadImageTrait
         if (!$file->isValid()) {
             return null;
         }
-
-        // Delete the existing file if it exists
         if ($existingFilePath) {
             Storage::disk('public')->delete($existingFilePath);
         }
-
-        // Ensure the directory exists
         if (!Storage::disk('public')->exists($directory)) {
             Storage::disk('public')->makeDirectory($directory);
         }
-
-        // Generate unique filename
         $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension();
         $path = "{$directory}/{$fileName}";
-
-        // Initialize ImageManager with the GD driver
-        $manager = new ImageManager(new Driver()); // Use the GD driver
-        $image = $manager->read($file); // This creates the image instance
-        $image->save(storage_path("app/public/{$path}"), 50); // Adjust quality as needed
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($file);
+        $image->save(storage_path("app/public/{$path}"), progressive: true, quality: 70);
 
         return $path;
     }
