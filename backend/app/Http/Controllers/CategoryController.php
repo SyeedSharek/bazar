@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorecategoryRequest;
 use App\Http\Requests\UpdatecategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Traits\UploadImageTrait;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    use UploadImageTrait;
     /**
      * Display a listing of the resource.
      */
@@ -24,7 +26,9 @@ class CategoryController extends Controller
      */
     public function store(StorecategoryRequest $request)
     {
-        Category::create($request->validated());
+        $image = $this->uploadImage(request: $request, directory: 'categories');
+        return $image;
+        Category::create($request->validated() + ['image' => $image]);
         return Response::created();
     }
 
@@ -48,8 +52,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return Response::success(message: 'Category deleted successfully');
     }
 }

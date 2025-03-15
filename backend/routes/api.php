@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RolePermissionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -8,9 +9,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::get('/test', function (Request $request) {
-    return "hello";
-});
 
 Route::group([
     'middleware' => 'api',
@@ -27,7 +25,8 @@ Route::group([
     Route::get('/allrole', [RolePermissionController::class, 'allrole']);
     Route::get('/allpermission', [RolePermissionController::class, 'allpermisisions']);
     Route::post('/addrole', [RolePermissionController::class, 'addRole']);
+});
 
-
-
+Route::middleware('api')->group(function () {
+    Route::apiResource('categories', CategoryController::class);
 });

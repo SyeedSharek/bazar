@@ -25,10 +25,8 @@ class StorecategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:categories|min:3',
-            'slug' => 'required|unique:categories',
             'image' => 'required|mimes:jpg,jpeg,png',
-            'description' => 'nullable',
-            'status' => 'required|in:active,inactive'
+            'description' => 'nullable|min:5',
         ];
     }
     public function failedValidation(Validation $validator)
