@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatecategoryRequest;
 use App\Models\Category;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -33,6 +34,7 @@ class CategoryController extends Controller
         $image = $this->uploadImage($request, 'image', 'categories');
         $data = Category::create(array_merge($request->validated(), ['image' => $image]));
         return Response::created($data);
+
     }
 
 
