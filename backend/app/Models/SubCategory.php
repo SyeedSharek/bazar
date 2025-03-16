@@ -5,36 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Category extends Model
+class SubCategory extends Model
 {
     protected $fillable = [
+        'category_id',
         'name',
         'slug',
-        'description',
         'image',
-        'status'
+        'status',
     ];
 
-    protected function casts(): array
+    public function category()
     {
-        return [
-            'status' => 'boolean',
-        ];
+        return $this->belongsTo(Category::class);
     }
-
-    /**
-     * Automatically generate the slug from the name attribute.
-     *
-     * @param string $value
-     */
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value); // Generate slug from the name
-    }
-
-    public function subCategories()
-    {
-        return $this->hasMany(SubCategory::class);
     }
 }
