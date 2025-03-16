@@ -24,7 +24,9 @@ class UpdatecategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|unique:categories,name,' . $this->id,
+            'image' => 'required|mimes:jpg,jpeg,png',
+            'description' => 'nullable|min:5',
         ];
     }
 

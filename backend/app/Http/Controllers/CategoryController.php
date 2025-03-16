@@ -20,7 +20,10 @@ class CategoryController extends Controller
     public function index()
     {
         $data = Category::latest()->get(['id', 'name', 'slug', 'image', 'description', 'status',]);
-        return Response::success($data);
+        if (count($data) > 0) {
+            return Response::success($data);
+        }
+        return Response::notFound();
     }
 
     /**
@@ -28,26 +31,20 @@ class CategoryController extends Controller
      */
     public function store(StorecategoryRequest $request)
     {
+        $image = $this->uploadImage($request, 'image', 'categories');
+        $data = Category::create(array_merge($request->validated(), ['image' => $image]));
+        return Response::created($data);
 
-        if (!Auth::check()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'You are not logged in',
-            ], 400);
-        }
-
-        // Upload the image
-
-
-        $image = $this->uploadImage(request: $request, directory: 'categories');
-        Category::create($request->validated() + ['image' => $image]);
-        return Response::created();
     }
 
 
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $category = Category::find($id);
+        if ($category) {
+            return Response::success($category);
+        }
+        return Response::notFound();
     }
 
     /**
@@ -56,7 +53,7 @@ class CategoryController extends Controller
     public function update(UpdatecategoryRequest $request, Category $category)
     {
         $image = $this->uploadImage(request: $request, directory: 'categories', existingFilePath: $category->image);
-        $category->update($request->validated() + ['image' => $image]);
+        $category->update(array_merge($request->validated(), ['image' => $image]));
         return Response::success($category);
     }
 

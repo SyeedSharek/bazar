@@ -26,8 +26,15 @@ trait UploadImageTrait
         }
 
         $file = $request->file($fieldName);
+
+        // Ensure it's a valid uploaded file
+        if (!$file instanceof UploadedFile || !$file->isValid()) {
+            return null;
+        }
+
         return $this->processImage($file, $directory, $existingFilePath);
     }
+
 
     /**
      * Upload multiple images.

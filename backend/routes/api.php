@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,6 @@ Route::group([
     Route::post('/addrole', [RolePermissionController::class, 'addRole']);
 });
 
-Route::middleware('api')->group(function () {
+Route::middleware('auth:api', Authenticate::class)->group(function () {
     Route::apiResource('categories', CategoryController::class);
 });
