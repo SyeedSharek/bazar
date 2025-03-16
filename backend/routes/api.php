@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\{CategoryController, SubCategoryController};
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Middleware\Authenticate;
 use Faker\Guesser\Name;
@@ -15,9 +15,9 @@ Route::get('/user', function (Request $request) {
 Route::group([
     'middleware' => 'jwt:api',
     'prefix' => 'auth'
-], function ($router) {
+], function () {
     Route::post('/register', [AuthController::class, 'register'])->withoutMiddleware('jwt:api');
-    Route::post('/login', [AuthController::class, 'login'])->name('login')->withoutMiddleware('jwt:api');
+    Route::post('/login', [AuthController::class, 'login'])->withoutMiddleware('jwt:api');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/profile', [AuthController::class, 'profile']);
@@ -31,4 +31,5 @@ Route::group([
 
 Route::middleware(['jwt:api'])->group(function () {
     Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('subcategories', SubCategoryController::class);
 });

@@ -34,7 +34,6 @@ class CategoryController extends Controller
         $image = $this->uploadImage($request, 'image', 'categories');
         $data = Category::create(array_merge($request->validated(), ['image' => $image]));
         return Response::created($data);
-
     }
 
 
