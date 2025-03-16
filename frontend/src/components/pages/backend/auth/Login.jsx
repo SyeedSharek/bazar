@@ -3,6 +3,7 @@ import UserIcon from "../../../ui/icons/UserIcon";
 import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../../ui/buttons/PrimaryButton";
 import axios from "axios";
+import Loading from "../../../../../../../reactCrud/fontend/src/components/Loading";
 
 export default function Login() {
 
@@ -23,6 +24,8 @@ export default function Login() {
       setError("Please enter email and password.");
       return;
     }
+
+    setLoading(true);
   
     try {
       const response = await axios.post("http://127.0.0.1:8000/api/auth/login", { email, password });       
@@ -40,6 +43,10 @@ export default function Login() {
       setError("Login failed. Check your credentials.");
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
   
 
 
