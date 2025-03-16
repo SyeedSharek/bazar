@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -17,26 +21,14 @@ class AuthController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'c_password' => 'required|same:password',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
-        $success['user'] =  $user;
-
-        return $this->sendResponse($success, 'User register successfully.');
+        // $input = $request->all();
+        // $input['password'] = bcrypt($input['password']);
+        $user = User::create($request->validated());
+        // $success['user'] =  $user;
+        return Response::success($user, 'Register successfully', Response::HTTP_OK);
+        // return $this->sendResponse($success, 'User register successfully.');
     }
 
 
@@ -45,17 +37,18 @@ class AuthController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(LoginRequest $request)
     {
-        $credentials = request(['email', 'password']);
+        $credentials = $request->only(['email', 'password']);
 
         if (! $token = auth("api")->attempt($credentials)) {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            // return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return Response::error("email & password not match", Response::HTTP_UNAUTHORIZED);
         }
 
         $success = $this->respondWithToken($token);
-
-        return $this->sendResponse($success, 'User login successfully.');
+        return Response::success($success, 'Login successfully', Response::HTTP_OK);
+        // return $this->sendResponse($success, 'User login successfully.');
     }
 
     /**
@@ -65,9 +58,9 @@ class AuthController extends BaseController
      */
     public function profile()
     {
-        $success = auth()->user();
-
-        return $this->sendResponse($success, 'Refresh token return successfully.');
+        $user = Auth::user();
+        return Response::success($user);
+        // return $this->sendResponse($success, 'Refresh token return successfully.');
     }
 
     /**
@@ -77,9 +70,9 @@ class AuthController extends BaseController
      */
     public function logout()
     {
-        auth()->logout();
-
-        return $this->sendResponse([], 'Successfully logged out.');
+        Auth::logout();
+        return Response::success(message: 'Log out successfully');
+        // return $this->sendResponse([], 'Successfully logged out.');
     }
 
     /**
@@ -89,9 +82,9 @@ class AuthController extends BaseController
      */
     public function refresh()
     {
-        $success = $this->respondWithToken(auth()->refresh());
-
-        return $this->sendResponse($success, 'Refresh token return successfully.');
+        $success = $this->respondWithToken(Auth::refresh());
+        return Response::success($success, 'Refresh token return successfully');
+        // return $this->sendResponse($success, 'Refresh token return successfully.');
     }
 
     /**
@@ -106,7 +99,7 @@ class AuthController extends BaseController
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' =>  config('jwt.ttl') * 60
         ];
     }
 }

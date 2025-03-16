@@ -14,7 +14,7 @@ class RolePermissionController extends Controller
     public function allrole()
     {
         if (Auth::guard('api')->check()) {
-            $roles = Role::with('permissions')->get();
+            $roles = Role::with('permissions:id,name')->get(['id', 'name']);
             return response()->json(['message' => 'All Roles', 'roles' => $roles]);
         } else {
             return response()->json(['message' => 'Unauthorized Access'], 401);
@@ -73,13 +73,13 @@ class RolePermissionController extends Controller
         $role->syncPermissions($request->permissions);
 
 
-            if ($role) {
+        if ($role) {
 
-                return response()->json([
-                    'message' => 'Role created and assigned successfully',
-                    'role' => $role,
-                ], 201);
-            }
+            return response()->json([
+                'message' => 'Role created and assigned successfully',
+                'role' => $role,
+            ], 201);
+        }
 
 
         $user = User::find($request->user_id);
@@ -95,6 +95,4 @@ class RolePermissionController extends Controller
             'role' => $role,
         ], 201);
     }
-
-
 }

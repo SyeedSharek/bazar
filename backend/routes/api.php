@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Middleware\Authenticate;
+use Faker\Guesser\Name;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,14 +13,14 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'jwt:api',
     'prefix' => 'auth'
 ], function ($router) {
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
-    Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api');
-    Route::post('/profile', [AuthController::class, 'profile'])->middleware('auth:api');
+    Route::post('/register', [AuthController::class, 'register'])->withoutMiddleware('jwt:api');
+    Route::post('/login', [AuthController::class, 'login'])->name('login')->withoutMiddleware('jwt:api');
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::post('/profile', [AuthController::class, 'profile']);
 
 
     //Role Permission
@@ -28,6 +29,6 @@ Route::group([
     Route::post('/addrole', [RolePermissionController::class, 'addRole']);
 });
 
-Route::middleware('auth:api', Authenticate::class)->group(function () {
+Route::middleware(['jwt:api'])->group(function () {
     Route::apiResource('categories', CategoryController::class);
 });
