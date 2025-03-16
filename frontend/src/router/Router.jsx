@@ -2,6 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router";
 import App from "../App";
 import Login from "../components/pages/backend/auth/Login";
+import ForgetPassword from "../components/pages/backend/auth/ForgetPassword";
+import Dashboad from "../components/pages/backend/auth/dashboard/dashboard";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const Router = () => {
   return (
@@ -9,21 +12,11 @@ export const Router = () => {
       <Routes>
         <Route index element={<App />} />
 
-        {/* for protected routes example 
-        <Route element={<AuthLayout />}>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-        </Route>
-        
-        for nested routes example
-        <Route path="concerts">
-          <Route index element={<ConcertsHome />} />
-          <Route path=":city" element={<City />} />
-          <Route path="trending" element={<Trending />} />
-        </Route> */}
+        <Route path="login" element={<Login />} />
+        <Route path="forget-password" element={<ForgetPassword />} />
 
-        <Route path="/admin/*">
-          <Route path="login" element={<Login />} />
+        <Route path="/admin/*" element={<ProtectedRoute />}>
+          <Route path="dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </>
