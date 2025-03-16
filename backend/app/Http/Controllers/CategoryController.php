@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatecategoryRequest;
 use App\Models\Category;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -34,6 +35,13 @@ class CategoryController extends Controller
     // }
     public function store(StorecategoryRequest $request)
     {
+        if (!Auth::check()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'You are not logged in',
+            ], 400);
+        }
+
         // Upload the image
         $image = $this->uploadImage(request: $request, directory: 'categories');
 
@@ -47,6 +55,7 @@ class CategoryController extends Controller
             'data' => $category,
         ], 201);
     }
+
 
     public function show(string $id)
     {
