@@ -25,10 +25,7 @@ export default function Login() {
     }
   
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/auth/login", { email, password });
-      console.log(response);
-  
-    
+      const response = await axios.post("http://127.0.0.1:8000/api/auth/login", { email, password });       
   
       if (response.status === 200) {
         // console.log(response)
