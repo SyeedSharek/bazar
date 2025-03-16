@@ -26,15 +26,9 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(StorecategoryRequest $request)
-    // {
-    //     $image = $this->uploadImage(request: $request, directory: 'categories');
-    //     return $image;
-    //     Category::create($request->validated() + ['image' => $image]);
-    //     return Response::created();
-    // }
     public function store(StorecategoryRequest $request)
     {
+
         if (!Auth::check()) {
             return response()->json([
                 'status' => false,
@@ -43,17 +37,11 @@ class CategoryController extends Controller
         }
 
         // Upload the image
+
+
         $image = $this->uploadImage(request: $request, directory: 'categories');
-
-        // Create the category with the uploaded image path
-        $category = Category::create($request->validated() + ['image' => $image]);
-
-        // Return a success response
-        return response()->json([
-            'status' => true,
-            'message' => 'Category created successfully',
-            'data' => $category,
-        ], 201);
+        Category::create($request->validated() + ['image' => $image]);
+        return Response::created();
     }
 
 
@@ -67,7 +55,8 @@ class CategoryController extends Controller
      */
     public function update(UpdatecategoryRequest $request, Category $category)
     {
-        $category->update($request->validated());
+        $image = $this->uploadImage(request: $request, directory: 'categories', existingFilePath: $category->image);
+        $category->update($request->validated() + ['image' => $image]);
         return Response::success($category);
     }
 
@@ -76,6 +65,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $this->deleteImage($category->image);
         $category->delete();
         return Response::success(message: 'Category deleted successfully');
     }
