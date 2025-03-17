@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\{CategoryController, SubCategoryController};
+use App\Http\Controllers\{BrandController, CategoryController, SubCategoryController};
 use App\Http\Controllers\RolePermissionController;
-use App\Http\Middleware\Authenticate;
-use Faker\Guesser\Name;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +30,5 @@ Route::group([
 Route::middleware(['jwt:api'])->group(function () {
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('subcategories', SubCategoryController::class);
+    Route::apiResource('brand', BrandController::class);
 });
