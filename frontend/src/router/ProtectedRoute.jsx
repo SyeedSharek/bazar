@@ -1,10 +1,11 @@
 import React from 'react'
 import { Navigate, Outlet } from "react-router-dom";
+import DashboardLayout from '../layouts/DashboardLayout';
 
 const ProtectedRoute = () => {
     const token = localStorage.getItem("token");
   
-    return token ? <Outlet /> : <Navigate to="/admin/login" />;
+    return token ? <DashboardLayout /> : <Navigate to="/admin/login" />;
   };
   
   export default ProtectedRoute;

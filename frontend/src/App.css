@@ -1,4 +1,5 @@
 .loader {
+<<<<<<< HEAD
   width: 32px;
   height: 32px;
   position: relative;
@@ -28,3 +29,23 @@
  100%{ box-shadow: 0 0 0 10px inset }
 }
   
+=======
+  width: 48px;
+  height: 48px;
+  border: 5px solid;
+  border-color: #ff3d00 transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+>>>>>>> 9b8a7a64a5313eb79167579068a43d1d9b156859

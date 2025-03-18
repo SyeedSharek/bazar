@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import UserIcon from "../../../ui/icons/UserIcon";
 import { Link, useNavigate } from "react-router-dom";
-import PrimaryButton from "../../../ui/buttons/PrimaryButton";
 import axios from "axios";
-import Loading from "../../../../../../../reactCrud/fontend/src/components/Loading";
+// import Loading from "../../../../../../../reactCrud/fontend/src/components/Loading";
+import UserIcon from './../../../components/ui/icons/UserIcon';
+import PrimaryButton from './../../../components/ui/buttons/PrimaryButton';
+import Loading from './../../../components/ui/Loading';
 
 export default function Login() {
-
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -17,23 +16,24 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-   
-    
-  
+
     if (!email || !password) {
       setError("Please enter email and password.");
       return;
     }
 
     setLoading(true);
-  
+
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/auth/login", { email, password });       
-  
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/auth/login",
+        { email, password }
+      );
+
       if (response.status === 200) {
         // console.log(response)
-        localStorage.setItem("token", response.data.data.access_token);      
-  
+        localStorage.setItem("token", response.data.data.access_token);
+
         navigate("/admin/dashboard");
       } else {
         setError("Invalid credentials, please try again.");
@@ -47,9 +47,6 @@ export default function Login() {
   if (loading) {
     return <Loading />;
   }
-  
-
-
 
   return (
     <div
@@ -106,7 +103,9 @@ export default function Login() {
             </div>
 
             <div className="mt-[10%] flex justify-center">
-              <PrimaryButton type="submit"  className="w-[220px]">Login</PrimaryButton>
+              <PrimaryButton type="submit" className="w-[220px]">
+                Login
+              </PrimaryButton>
             </div>
           </form>
         </div>

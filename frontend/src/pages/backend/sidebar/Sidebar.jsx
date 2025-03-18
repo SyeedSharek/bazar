@@ -2,6 +2,10 @@ import React from 'react'
 
 export default function Sidebar() {
   return (
-    <div>Sidebar</div>
+    <>
+    <aside>
+      Sidebar
+    </aside>
+    </>
   )
 }
