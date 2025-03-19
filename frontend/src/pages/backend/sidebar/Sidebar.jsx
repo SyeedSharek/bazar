@@ -4,7 +4,7 @@ export default function Sidebar() {
   return (
     <>
     <aside>
-      Sidebar
+      Sidebar 
     </aside>
     </>
   )
