@@ -1,5 +1,7 @@
 import React from 'react';
 import LightIcon from '../../../components/ui/icons/LightIcon';
+import Notification from '../../../components/ui/icons/Notification';
+import Profile from '../../../components/ui/icons/Profile';
 
 
 export default function Navbar() {
@@ -9,8 +11,8 @@ export default function Navbar() {
       <div className='flex gap-6 items-center'>
         <div>Country</div>
         <div><LightIcon /></div>
-        <div>Notification</div>
-        <div>Profile</div>
+        <div><Notification /></div>
+        <div><Profile /></div>
       </div>
     </div>
   );
