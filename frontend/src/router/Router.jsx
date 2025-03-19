@@ -5,6 +5,8 @@ import Login from "../pages/backend/auth/Login";
 import ForgetPassword from "../pages/backend/auth/ForgetPassword";
 import Dashboard from "../pages/backend/auth/dashboard/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
+import Category from "../pages/backend/category/category";
+import SubCategory from "../pages/backend/subCategory/SubCategory";
 
 export const Router = () => {
   return (
@@ -18,6 +20,9 @@ export const Router = () => {
         {/* dashboard related routes */}
         <Route path="/admin/*" element={<ProtectedRoute />}>
           <Route path="dashboard" element={<Dashboard />} />
+
+          <Route path="category" element={<Category />} />
+          <Route path="subCategory" element={<SubCategory />} />
         </Route>
       </Routes>
     </>
