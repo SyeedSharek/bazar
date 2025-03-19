@@ -24,4 +24,10 @@ class SubCategory extends Model
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value); // Generate slug from the name
     }
+    protected function casts(): array
+    {
+        return [
+            'status' => 'boolean',
+        ];
+    }
 }

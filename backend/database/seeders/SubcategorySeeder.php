@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class SubcategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,15 +16,14 @@ class CategorySeeder extends Seeder
         $data = [];
         for($i = 0; $i<=100; $i++ ){
             $data[] = [
+                'category_id' => rand(1,100),
                 'name' => fake()->unique()->firstName(),
                 'slug' => fake()->unique()->slug(),
-                'description' => fake()->text(),
                 'image' => fake()->imageUrl(),
                 'created_at' => now(),
             ];
         }
 
-        Category::insert($data);
-
+        SubCategory::insert($data);
     }
 }

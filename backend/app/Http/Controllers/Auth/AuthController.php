@@ -23,12 +23,8 @@ class AuthController extends BaseController
      */
     public function register(RegisterRequest $request)
     {
-        // $input = $request->all();
-        // $input['password'] = bcrypt($input['password']);
         $user = User::create($request->validated());
-        // $success['user'] =  $user;
         return Response::success($user, 'Register successfully', Response::HTTP_OK);
-        // return $this->sendResponse($success, 'User register successfully.');
     }
 
 
@@ -42,13 +38,11 @@ class AuthController extends BaseController
         $credentials = $request->only(['email', 'password']);
 
         if (! $token = auth("api")->attempt($credentials)) {
-            // return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
             return Response::error("email & password not match", Response::HTTP_UNAUTHORIZED);
         }
 
         $success = $this->respondWithToken($token);
         return Response::success($success, 'Login successfully', Response::HTTP_OK);
-        // return $this->sendResponse($success, 'User login successfully.');
     }
 
     /**
@@ -60,7 +54,6 @@ class AuthController extends BaseController
     {
         $user = Auth::user();
         return Response::success($user);
-        // return $this->sendResponse($success, 'Refresh token return successfully.');
     }
 
     /**
@@ -72,7 +65,6 @@ class AuthController extends BaseController
     {
         Auth::logout();
         return Response::success(message: 'Log out successfully');
-        // return $this->sendResponse([], 'Successfully logged out.');
     }
 
     /**
@@ -84,7 +76,6 @@ class AuthController extends BaseController
     {
         $success = $this->respondWithToken(Auth::refresh());
         return Response::success($success, 'Refresh token return successfully');
-        // return $this->sendResponse($success, 'Refresh token return successfully.');
     }
 
     /**
