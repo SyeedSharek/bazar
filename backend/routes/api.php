@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\{BrandController, CategoryController, SubCategoryController};
+use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\RolePermissionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,5 @@ Route::middleware(['jwt:api'])->group(function () {
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('subcategories', SubCategoryController::class);
     Route::apiResource('brand', BrandController::class);
+    Route::apiResource('products',ProductController::class);
 });
