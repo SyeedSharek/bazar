@@ -30,4 +30,8 @@ class SubCategory extends Model
             'status' => 'boolean',
         ];
     }
+    public function getImageAttribute($value)
+    {
+        return asset('storage/' . $value);
+    }
 }

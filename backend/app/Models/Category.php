@@ -33,6 +33,11 @@ class Category extends Model
         $this->attributes['slug'] = Str::slug($value); // Generate slug from the name
     }
 
+    public function getImageAttribute($value)
+    {
+        return asset('storage/' . $value);
+    }
+
     public function subCategories()
     {
         return $this->hasMany(SubCategory::class);

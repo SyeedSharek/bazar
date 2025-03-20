@@ -22,8 +22,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::with('productImages','category','subCategory','brand')->latest()->paginate(10);
-
+        $product = Product::with('productImages', 'category', 'subCategory', 'brand')->latest()->paginate(10);
         return Response::success($product);
     }
 
