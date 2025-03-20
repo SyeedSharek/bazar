@@ -24,7 +24,7 @@ class StoreProductImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'images' => 'required|array', // Accept multiple images
+            'images' => 'required|array' . $this->id,
             'images.*' => 'image|mimes:jpg,jpeg,png'
         ];
     }
