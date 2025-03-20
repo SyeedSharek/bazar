@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\StoreProductImageRequest;
+use App\Http\Requests\Product\UpdateProductImage;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
@@ -114,10 +116,39 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update($id, StoreProductRequest $productRequest, StoreProductImageRequest $imageRequest)
+{
+    DB::beginTransaction();
+
+    try {
+
+        $product = Product::findOrFail($id);
+
+
+        $product->update($productRequest->validated());
+
+        if ($imageRequest->hasFile('images')) {
+            ProductImage::where('product_id', $product->id)->delete();
+
+            $images = $this->uploadImages($imageRequest, 'images', 'products');
+
+            foreach ($images as $imagePath) {
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_path' => $imagePath,
+                ]);
+            }
+        }
+
+        DB::commit();
+
+        return Response::success($product , "Product updated successfully");
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return response()->json(['error' => $e->getMessage()], 500);
     }
+}
+
 
     /**
      * Remove the specified resource from storage.
