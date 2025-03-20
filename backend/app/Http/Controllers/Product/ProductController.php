@@ -20,40 +20,40 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     $product = Product::with('productImages','category','subCategory','brand')->latest()->paginate(10);
-
-    //     return Response::success($product);
-    // }
-
     public function index()
     {
-        $products = Product::with(['productImages', 'category', 'subCategory', 'brand'])
-            ->latest()
-            ->paginate(10);
+        $product = Product::with('productImages','category','subCategory','brand')->latest()->paginate(10);
 
-        return Response::success($products->map(function ($product) {
-            return [
-                'id' => $product->id,
-                'name' => $product->name,
-                'old_price' => $product->old_price,
-                'new_price' => $product->new_price,
-                'description' => $product->description,
-                'quantity' => $product->quantity,
-                'discount' => $product->discount,
-                'product_images' => $product->productImages->map(function ($image) {
-                    return [
-                        'id' => $image->id,
-                        'product_id' => $image->product_id,
-                        'image_url' => asset('storage/' . $image->image_path),
-                    ];
-                }),
-                'created_at' => $product->created_at,
-                'updated_at' => $product->updated_at,
-            ];
-        }));
+        return Response::success($product);
     }
+
+    // public function index()
+    // {
+    //     $products = Product::with(['productImages', 'category', 'subCategory', 'brand'])
+    //         ->latest()
+    //         ->paginate(10);
+
+    //     return Response::success($products->map(function ($product) {
+    //         return [
+    //             'id' => $product->id,
+    //             'name' => $product->name,
+    //             'old_price' => $product->old_price,
+    //             'new_price' => $product->new_price,
+    //             'description' => $product->description,
+    //             'quantity' => $product->quantity,
+    //             'discount' => $product->discount,
+    //             'product_images' => $product->productImages->map(function ($image) {
+    //                 return [
+    //                     'id' => $image->id,
+    //                     'product_id' => $image->product_id,
+    //                     'image_url' => asset('storage/' . $image->image_path),
+    //                 ];
+    //             }),
+    //             'created_at' => $product->created_at,
+    //             'updated_at' => $product->updated_at,
+    //         ];
+    //     }));
+    // }
 
 
 
@@ -84,7 +84,7 @@ class ProductController extends Controller
             foreach ($images as $imagePath) {
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image' => $imagePath,
+                    'image_path' => $imagePath,
                 ]);
             }
 
