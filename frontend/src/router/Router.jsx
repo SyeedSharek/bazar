@@ -18,8 +18,8 @@ export const Router = () => {
         <Route path="forget-password" element={<ForgetPassword />} />
 
         {/* dashboard related routes */}
-        <Route path="/admin/*" element={<ProtectedRoute />}>
-          <Route path="dashboard" element={<Dashboard />} />
+        <Route path="admin" element={<ProtectedRoute />}>
+          <Route index element={<Dashboard />} />
 
           <Route path="category" element={<Category />} />
           <Route path="subCategory" element={<SubCategory />} />

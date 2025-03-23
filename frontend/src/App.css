@@ -3,11 +3,12 @@
   height: 32px;
   position: relative;
   border-radius: 50%;
-  color: #FF3D00;
+  color: #ff3d00;
   animation: fill 1s ease-in infinite alternate;
 }
-.loader::before , .loader::after {
-  content: '';
+.loader::before,
+.loader::after {
+  content: "";
   position: absolute;
   height: 100%;
   width: 100%;
@@ -24,7 +25,10 @@
 }
 
 @keyframes fill {
- 0% {  box-shadow: 0 0 0 2px inset }
- 100%{ box-shadow: 0 0 0 10px inset }
+  0% {
+    box-shadow: 0 0 0 2px inset;
+  }
+  100% {
+    box-shadow: 0 0 0 10px inset;
+  }
 }
-  

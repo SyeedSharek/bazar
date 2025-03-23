@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import Loading from "../../../../../../../reactCrud/fontend/src/components/Loading";
-import UserIcon from './../../../components/ui/icons/UserIcon';
-import PrimaryButton from './../../../components/ui/buttons/PrimaryButton';
-import Loading from './../../../components/ui/Loading';
+import UserIcon from "./../../../components/ui/icons/UserIcon";
+import PrimaryButton from "./../../../components/ui/buttons/PrimaryButton";
+import Loading from "./../../../components/ui/Loading";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +14,7 @@ export default function Login() {
   const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
+  const apiUrl = import.meta.env.VITE_BACKEND_API;
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -25,10 +26,10 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/auth/login",
-        { email, password }
-      );
+      const response = await axios.post(`${apiUrl}/auth/login`, {
+        email,
+        password,
+      });
 
       if (response.status === 200) {
         // console.log(response)
@@ -49,61 +50,57 @@ export default function Login() {
   }
 
   return (
-    <div
-      className="h-screen flex items-center justify-center bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/auth/login.jpg')" }}
-    >
-      <div className="bg-white p-8 rounded-lg shadow-lg w-[30%] h-auto">
-        <h1 className="text-center text-2xl font-bold">Login</h1>
-        <div className=" ">
+    <div className="h-screen flex items-center justify-center bg-cover bg-center">
+      <div className=" p-8 rounded-lg h-auto">
+        <h1 className="text-center text-4xl font-semibold font-outfit mb-10">
+          Login
+        </h1>
+        <p className="text-sm font-poppins my-5">
+          If you have an account, sign in with your username or email address.
+        </p>
+        <div className="">
           <form action="" onSubmit={handleLogin}>
-            <div className="mt-[10%] mb-4">
-              <label className="text-[22px] mb-3 block" htmlFor="password">
-                Email
+            <div className="mb-4">
+              <label className="text-sm mb-2 block" htmlFor="email">
+                Username or Email address
               </label>
-              <div className="flex w-full border-b-2 focus-within:border-blue-500">
-                <div>
-                  <UserIcon />
-                </div>
+              <div className="flex w-full border-2 border-gray-300 rounded-md focus-within:border-indigo-500">
                 <div className="">
                   <input
-                    className="w-full outline-none border-none bg-transparent p-2"
+                    className="w-full outline-none bg-transparent p-2"
                     type="email"
                     name="email"
                     id="email"
-                    placeholder="Enter your Email"
+                    placeholder="ex: 9FtE0@example.com"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
             </div>
 
-            <div className="mt-[10%] mb-4">
-              <label className="text-[22px] mb-3 block" htmlFor="password">
+            <div className=" mb-4">
+              <label className="text-sm mb-2 block" htmlFor="password">
                 Password
               </label>
-              <div className="flex w-full border-b-2 focus-within:border-blue-500">
-                <div>
-                  <UserIcon />
-                </div>
+              <div className="flex w-full border-2 border-gray-300 rounded-md focus-within:border-indigo-500">
                 <div className="">
                   <input
                     className="w-full outline-none border-none bg-transparent p-2"
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="Enter your Password"
+                    placeholder="ex: **********"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
             </div>
             <div className="flex justify-end mt-1">
-              <Link to="/admin/forget-password">Forget Password</Link>
+              <Link to="/forget-password">Forget Password</Link>
             </div>
 
-            <div className="mt-[10%] flex justify-center">
-              <PrimaryButton type="submit" className="w-[220px]">
+            <div className="mt-5 flex justify-center">
+              <PrimaryButton type="submit" className="w-full">
                 Login
               </PrimaryButton>
             </div>
