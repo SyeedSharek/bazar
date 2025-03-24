@@ -5,6 +5,9 @@
   --font-poppins: "Poppins", "sans-serif";
   --font-roboto: "Roboto", "sans-serif";
   --font-outfit: "Outfit", "sans-serif";
+  --color-primary: #634c9f;
+  --color-primary-light: #f5f4fe;
+  --color-gray: #6c757d;
 }
 html {
   @apply font-inter;
