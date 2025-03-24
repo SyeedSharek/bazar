@@ -25,7 +25,7 @@ export const Router = () => {
 
         {/* dashboard related routes */}
         <Route path="admin" element={<ProtectedRoute />}>
-          <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
 
           <Route path="category" element={<Category />} />
           <Route path="subCategory" element={<SubCategory />} />
