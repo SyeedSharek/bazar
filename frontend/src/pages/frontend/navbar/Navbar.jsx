@@ -41,11 +41,11 @@ export default function navbar() {
         <div className="flex items-center gap-6 ml-8">
           <UserIcon className="w-5 h-5" />
           <div>
-            <Link to="/frontend/register" className="text-sm opacity-70">
+            <Link to="/register" className="text-sm opacity-70">
               Sign In
             </Link>
             <br />
-            <Link to="/frontend/customer_profile" className="text-md font-medium">
+            <Link to="/customer_profile" className="text-md font-medium">
               Account
             </Link>
           </div>
