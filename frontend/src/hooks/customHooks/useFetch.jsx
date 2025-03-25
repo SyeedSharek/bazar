@@ -6,6 +6,7 @@ const useFetch = (url, method = "GET", requestData = null) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,10 +15,11 @@ const useFetch = (url, method = "GET", requestData = null) => {
           method: method,
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           data: requestData,
         });
-        setData(response.data);
+        setData(response);
         setIsLoading(false);
         setError(null);
       } catch (error) {
@@ -27,7 +29,7 @@ const useFetch = (url, method = "GET", requestData = null) => {
     };
 
     fetchData();
-  }, [url, method, requestData]);
+  }, [url, method, requestData, token]);
 
   return { data, isLoading, error };
 };

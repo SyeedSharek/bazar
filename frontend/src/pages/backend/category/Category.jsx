@@ -1,93 +1,136 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+import PrimaryButton from "../../../components/ui/buttons/PrimaryButton";
+import axios from "axios";
+import Loading from "../../../components/ui/Loading";
 
-export default function Category() {
+const Category = () => {
+  const apiUrl = import.meta.env.VITE_BACKEND_API;
+  const token = localStorage.getItem("token");
+  const [category, setCategory] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios(`${apiUrl}/categories?paginate=15`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response?.data?.status === true) {
+          setIsLoading(false);
+          setCategory(response.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCategories();
+  }, [apiUrl, token]);
   return (
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <div>
-        <div>
-          <p> Category</p>
-        </div>
-      </div>
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" class="px-6 py-3">
-              Product name
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Color
-            </th>
-            <th scope="col" class="px-6 py-3">
+    <>
+      {/* breadcrumb */}
+      <nav className="flex">
+        <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+          <li className="inline-flex items-center gap-2">
+            <FaHome size={16} />
+            <Link
+              to="/admin/dashboard"
+              className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary "
+            >
+              Home
+            </Link>
+          </li>
+          <IoIosArrowForward size={16} />
+          <li className="inline-flex items-center gap-2">
+            <Link
+              to="/admin/category"
+              className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary "
+            >
               Category
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Price
-            </th>
-            <th scope="col" class="px-6 py-3">
-              <span class="sr-only">Edit</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Apple MacBook Pro 17"
-            </th>
-            <td class="px-6 py-4">Silver</td>
-            <td class="px-6 py-4">Laptop</td>
-            <td class="px-6 py-4">$2999</td>
-            <td class="px-6 py-4 text-right">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
-          </tr>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Microsoft Surface Pro
-            </th>
-            <td class="px-6 py-4">White</td>
-            <td class="px-6 py-4">Laptop PC</td>
-            <td class="px-6 py-4">$1999</td>
-            <td class="px-6 py-4 text-right">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
-          </tr>
-          <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Magic Mouse 2
-            </th>
-            <td class="px-6 py-4">Black</td>
-            <td class="px-6 py-4">Accessories</td>
-            <td class="px-6 py-4">$99</td>
-            <td class="px-6 py-4 text-right">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >
-                Edit
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </Link>
+          </li>
+        </ol>
+      </nav>
+      {/* breadcrumb */}
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-8 container mx-auto">
+        <div className="py-4 px-4 bg-white rounded-xl my-4 flex justify-between items-center">
+          <div>
+            <p className="font-poppins font-semibold text-2xl"> Category</p>
+          </div>
+          <PrimaryButton className="text-sm hover:bg-hover cursor-pointer">
+            Add Category
+          </PrimaryButton>
+        </div>
+        <table className="w-full text-sm text-left text-gray-500 ">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                SL
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Category name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Color
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Category
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Price
+              </th>
+              <th scope="col" className="px-6 py-3">
+                <span className="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {isLoading && (
+              <span className="flex justify-center items-center">
+                <Loading />
+              </span>
+            )}
+            {!isLoading &&
+              category?.data.map((item, index) => (
+                <tr
+                  key={index}
+                  className="bg-white border-b border-gray-200 hover:bg-gray-50 "
+                >
+                  <td scope="row" className="px-6 py-4">
+                    {index + 1}
+                  </td>
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                  >
+                    {item.name}
+                  </th>
+                  <td className="px-6 py-4">{item.slug}</td>
+                  <td className="px-6 py-4">
+                    <img src={item.image} className="w-16" alt={item.name} />
+                  </td>
+                  <td className="px-6 py-4">{item.status}</td>
+                  <td className="px-6 py-4 text-right">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
-}
+};
+
+export default Category;
