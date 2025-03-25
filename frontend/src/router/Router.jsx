@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router";
+import { Routes, Route, useLocation, Navigate } from "react-router";
 import App from "../App";
 import Login from "../pages/backend/auth/Login";
 import ForgetPassword from "../pages/backend/auth/ForgetPassword";
@@ -15,6 +15,10 @@ import Order_Tracking from "../pages/frontend/order_tracking/Order_Tracking";
 import Register from "../pages/frontend/auth/Register";
 
 export const Router = () => {
+  const location = useLocation();
+  if (location.pathname === "/admin/" || location.pathname === "/admin") {
+    return <Navigate to={"/admin/dashboard"} />;
+  }
   return (
     <>
       <Routes>
@@ -25,7 +29,7 @@ export const Router = () => {
 
         {/* dashboard related routes */}
         <Route path="admin" element={<ProtectedRoute />}>
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route index path="dashboard" element={<Dashboard />} />
 
           <Route path="category" element={<Category />} />
           <Route path="subCategory" element={<SubCategory />} />
@@ -34,13 +38,12 @@ export const Router = () => {
         {/* Frontend Router  */}
 
         <Route path="/frontend/*">
-        <Route path="dashboard" element={<FrontDashboard />} />
-        <Route path="about" element={<About />} />
-        <Route path="customer_profile" element={<Customer_Profile />} />
-        <Route path="wishlist" element={<WishList />} />
-        <Route path="order" element={<Order_Tracking />} />
-        <Route path="register" element={<Register />} />
-
+          <Route path="dashboard" element={<FrontDashboard />} />
+          <Route path="about" element={<About />} />
+          <Route path="customer_profile" element={<Customer_Profile />} />
+          <Route path="wishlist" element={<WishList />} />
+          <Route path="order" element={<Order_Tracking />} />
+          <Route path="register" element={<Register />} />
         </Route>
       </Routes>
     </>
