@@ -11,6 +11,7 @@ const Category = () => {
   const token = localStorage.getItem("token");
   const [category, setCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  
 
   useEffect(() => {
     const fetchCategories = async () => {

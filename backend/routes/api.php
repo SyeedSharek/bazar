@@ -19,7 +19,7 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login'])->withoutMiddleware('jwt:api');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::post('/profile', [AuthController::class, 'profile']);
+    Route::get('/profile', [AuthController::class, 'profile']);
 
 
     //Role Permission
@@ -32,8 +32,8 @@ Route::middleware(['jwt:api'])->group(function () {
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('subcategories', SubCategoryController::class);
     Route::apiResource('brand', BrandController::class);
-    Route::apiResource('products',ProductController::class);
+    Route::apiResource('products', ProductController::class);
 });
 
 // Frontend Api
-    Route::get('frontend/categories', [CategoryController::class, 'all_category']);
+Route::get('frontend/categories', [CategoryController::class, 'all_category']);
