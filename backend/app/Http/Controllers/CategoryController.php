@@ -74,4 +74,10 @@ class CategoryController extends Controller
         $category->delete();
         return Response::success(message: 'Category deleted successfully');
     }
+
+    public function all_category(){
+        $data = Category::latest()->select(['id', 'name', 'image'])->get();
+        return Response::success($data);
+
+    }
 }

@@ -29,9 +29,9 @@ export default function Top_Navbar() {
     <>
       <div className="flex justify-between items-center w-full px-4 py-2 border-b border-[#E5E7EB]">
         <div className="flex items-center gap-6">
-          <Link to="/frontend/about">About</Link>
-          <Link to="/frontend/customer_profile">Account</Link>
-          <Link to="/frontend/wishlist">Wishlist</Link>
+          <Link to="/about">About</Link>
+          <Link to="/customer_profile">Account</Link>
+          <Link to="/wishlist">Wishlist</Link>
 
           <div className="flex items-center border-l border-gray-300 pl-4">
             <p className="text-md">

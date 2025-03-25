@@ -34,3 +34,6 @@ Route::middleware(['jwt:api'])->group(function () {
     Route::apiResource('brand', BrandController::class);
     Route::apiResource('products',ProductController::class);
 });
+
+// Frontend Api
+    Route::get('frontend/categories', [CategoryController::class, 'all_category']);
