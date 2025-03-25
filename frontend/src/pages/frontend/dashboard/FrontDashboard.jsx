@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../header/Header';
 import Navbar from '../navbar/navbar';
+import Main_Home_Bar from '../main_slider/Main_Home_Bar';
 
 
 
@@ -9,6 +10,7 @@ export default function FrontDashboard() {
     <>
     <Header/>   
     <Navbar/>
+    <Main_Home_Bar/>
     </>
   )
 }

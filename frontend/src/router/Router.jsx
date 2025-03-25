@@ -13,6 +13,7 @@ import Customer_Profile from "../pages/frontend/customer_profile/Customer_Profil
 import WishList from "../pages/frontend/wishlist/WishList";
 import Order_Tracking from "../pages/frontend/order_tracking/Order_Tracking";
 import Register from "../pages/frontend/auth/Register";
+import Blog from "../pages/frontend/blog/Blog";
 
 export const Router = () => {
   return (
@@ -33,13 +34,14 @@ export const Router = () => {
 
         {/* Frontend Router  */}
 
-        <Route path="/frontend/*">
+        <Route path="/*">
         <Route path="dashboard" element={<FrontDashboard />} />
         <Route path="about" element={<About />} />
         <Route path="customer_profile" element={<Customer_Profile />} />
         <Route path="wishlist" element={<WishList />} />
         <Route path="order" element={<Order_Tracking />} />
         <Route path="register" element={<Register />} />
+        <Route path="blog" element ={<Blog />} />
 
         </Route>
       </Routes>
