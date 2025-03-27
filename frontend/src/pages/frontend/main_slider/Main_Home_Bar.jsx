@@ -10,11 +10,11 @@ export default function Main_Home_Bar() {
         <div>
           <Category />
         </div>
-        <div>
+        <div className="w-full">
           <div>
             <Home_Bar />
           </div>
-          <div>
+          <div className="w-[full]">
             <Slider />
           </div>
         </div>

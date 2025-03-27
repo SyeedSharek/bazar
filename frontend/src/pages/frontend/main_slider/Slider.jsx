@@ -2,6 +2,13 @@ import React from 'react'
 
 export default function Slider() {
   return (
-    <div>Slider</div>
+    <>
+    <div className='h-[507px] '>
+      
+
+    </div>
+    
+    
+    </>
   )
 }

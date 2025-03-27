@@ -14,6 +14,10 @@ import WishList from "../pages/frontend/wishlist/WishList";
 import Order_Tracking from "../pages/frontend/order_tracking/Order_Tracking";
 import Register from "../pages/frontend/auth/Register";
 import Blog from "../pages/frontend/blog/Blog";
+import All_Product from "../pages/frontend/product/All_Product";
+import Contact from "../pages/frontend/contact/Contact";
+import Treanding_Product from "../pages/frontend/product/Treanding_Product";
+import Finish_Product_Sell from "../pages/frontend/product/Finish_Product_Sell";
 
 export const Router = () => {
   const location = useLocation();
@@ -46,6 +50,11 @@ export const Router = () => {
           <Route path="order" element={<Order_Tracking />} />
           <Route path="register" element={<Register />} />
           <Route path="blog" element={<Blog />} />
+          <Route path="all_product" element={<All_Product />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="treanding_product" element={<Treanding_Product />} />
+          <Route path="finish_product_sell_details" element={<Finish_Product_Sell />} />
+
         </Route>
       </Routes>
     </>
