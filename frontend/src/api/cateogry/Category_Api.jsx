@@ -11,8 +11,10 @@ export default function Category_Api() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${apiUrl}/frontend/categories`)
+      // .get(`${apiUrl}/frontend/categories`)
+      .get(`http://127.0.0.1:8000/api/frontend/categories`)
       .then((response) => {
+        // console.log(response)
         setCategories(response.data.data);
         // console.log(response.data.data)
         setLoading(false);

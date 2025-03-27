@@ -20,7 +20,8 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`${apiUrl}/auth/login`, {
+      const response = await axios.post(`${apiUrl}/auth/login`, 
+        {
         email,
         password,
       });

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\{BrandController, CategoryController, SubCategoryController};
+use App\Http\Controllers\{BrandController, CategoryController, SliderController, SubCategoryController};
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\RolePermissionController;
 use Illuminate\Http\Request;
@@ -33,7 +33,9 @@ Route::middleware(['jwt:api'])->group(function () {
     Route::apiResource('subcategories', SubCategoryController::class);
     Route::apiResource('brand', BrandController::class);
     Route::apiResource('products', ProductController::class);
+    Route::post('store/slider',[SliderController::class,'store']);
 });
 
 // Frontend Api
 Route::get('frontend/categories', [CategoryController::class, 'all_category']);
+Route::get('frontend/sliders',[SliderController::class,'all_slider']);

@@ -6,7 +6,7 @@ export default function Home_Bar() {
   const { categories, loading, error } = Category_Api();
 
   return (
-    <div className="flex justify-between items-center w-full p-4 shadow-md bg-white text-xl font-semibold">
+    <div className="flex justify-between items-center w-full p-4 border-b border-[#E5E7EB] bg-white text-sm font-semibold">
       {/* Left Section */}
       <div className="flex gap-x-6">
         <Link to="/dashboard" className="hover:text-[#634C9F] hover:underline">
