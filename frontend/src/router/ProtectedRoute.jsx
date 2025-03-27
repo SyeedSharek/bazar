@@ -30,7 +30,6 @@ const ProtectedRoute = () => {
       } catch (error) {
         toast.error(error.response?.data?.message || "Authentication failed!");
         setAuth({ isLoading: false, isAuthenticated: false });
-        console.log(error?.response?.data);
       }
     };
 

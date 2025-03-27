@@ -24,7 +24,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="w-[350px] text-black font-semibold p-6">
+    <div className=" w-[350px] text-black font-semibold p-6">
       {/* Logo Section */}
       <div className="flex items-center gap-4 mb-6">
         <img src={logo} alt="logo" className="size-14 rounded-full" />

@@ -11,7 +11,6 @@ const Category = () => {
   const token = localStorage.getItem("token");
   const [category, setCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -68,6 +67,12 @@ const Category = () => {
             Add Category
           </PrimaryButton>
         </div>
+        {isLoading && (
+          <div className="w-full h-[50vh] flex justify-center">
+            <Loading />
+          </div>
+        )}
+
         <table className="w-full text-sm text-left text-gray-500 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
@@ -77,26 +82,24 @@ const Category = () => {
               <th scope="col" className="px-6 py-3">
                 Category name
               </th>
-              <th scope="col" className="px-6 py-3">
-                Color
+              <th scope="col" className="px-6 py-3 w-sm">
+                Category slug
               </th>
               <th scope="col" className="px-6 py-3">
                 Category
               </th>
               <th scope="col" className="px-6 py-3">
-                Price
+                Status
+              </th>
+              <th scope="col" className="px-6 py-3 w-lg">
+                Description
               </th>
               <th scope="col" className="px-6 py-3">
-                <span className="sr-only">Edit</span>
+                Action
               </th>
             </tr>
           </thead>
-          <tbody>
-            {isLoading && (
-              <span className="flex justify-center items-center">
-                <Loading />
-              </span>
-            )}
+          <tbody className="min-h-[50vh] overflow-y-auto">
             {!isLoading &&
               category?.data.map((item, index) => (
                 <tr
@@ -114,9 +117,10 @@ const Category = () => {
                   </th>
                   <td className="px-6 py-4">{item.slug}</td>
                   <td className="px-6 py-4">
-                    <img src={item.image} className="w-16" alt={item.name} />
+                    <img src={item.image} className="w-8" alt={item.name} />
                   </td>
                   <td className="px-6 py-4">{item.status}</td>
+                  <td className="px-6 py-4 line-clamp-1">{item.description}</td>
                   <td className="px-6 py-4 text-right">
                     <a
                       href="#"

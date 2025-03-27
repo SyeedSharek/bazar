@@ -6,13 +6,13 @@ import { Outlet } from "react-router-dom";
 const DashboardLayout = () => {
   return (
     <>
-      <div className="flex h-screen bg-primary-light">
+      <div className="flex bg-primary-light">
         <Sidebar />
 
         <div className="w-full">
           <Navbar />
 
-          <div className="flex-1 p-4 overflow-auto">
+          <div className="flex-1 p-4 overflow-y-scroll min-h-screen">
             <Outlet />
           </div>
         </div>

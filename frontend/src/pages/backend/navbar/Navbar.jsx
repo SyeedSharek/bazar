@@ -9,7 +9,7 @@ import { BsCart2 } from "react-icons/bs";
 
 export default function Navbar() {
   return (
-    <div className=" w-full h-[80px] mt-0 flex gap-16 text-gray-800 justify-between items-center px-6">
+    <div className="sticky top-0 z-50 bg-primary-light w-full h-[80px] mt-0 flex gap-16 text-gray-800 justify-between items-center px-6">
       <div className="text-2xl font-bold font-outfit">Overview</div>
       <div className="w-full">
         <Input type="text" name="search" placeholder="Search" />
