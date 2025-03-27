@@ -8,6 +8,7 @@
   --color-primary: #634c9f;
   --color-primary-light: #f5f4fe;
   --color-gray: #6c757d;
+  --color-hover: #4f3b84;
 }
 html {
   @apply font-inter;

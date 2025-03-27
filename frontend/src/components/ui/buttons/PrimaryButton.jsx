@@ -1,4 +1,5 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 export default function PrimaryButton({
   children,
@@ -9,7 +10,9 @@ export default function PrimaryButton({
   return (
     <button
       type={type}
-      className={`bg-indigo-700 hover:bg-indigo-800 text-white font-medium px-4 py-2 rounded-lg transition duration-300 ${className}`}
+      className={twMerge(
+        `bg-primary hover:bg-purple-500 text-white font-normal px-4 py-2 rounded-lg transition duration-300 ${className}`
+      )}
       onClick={onClick}
     >
       {children}

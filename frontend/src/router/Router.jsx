@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router";
+import { Routes, Route, useLocation, Navigate } from "react-router";
 import App from "../App";
 import Login from "../pages/backend/auth/Login";
 import ForgetPassword from "../pages/backend/auth/ForgetPassword";
@@ -20,6 +20,10 @@ import Treanding_Product from "../pages/frontend/product/Treanding_Product";
 import Finish_Product_Sell from "../pages/frontend/product/Finish_Product_Sell";
 
 export const Router = () => {
+  const location = useLocation();
+  if (location.pathname === "/admin/" || location.pathname === "/admin") {
+    return <Navigate to={"/admin/dashboard"} />;
+  }
   return (
     <>
       <Routes>
@@ -30,7 +34,7 @@ export const Router = () => {
 
         {/* dashboard related routes */}
         <Route path="admin" element={<ProtectedRoute />}>
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route index path="dashboard" element={<Dashboard />} />
 
           <Route path="category" element={<Category />} />
           <Route path="subCategory" element={<SubCategory />} />
@@ -50,6 +54,7 @@ export const Router = () => {
           <Route path="contact" element={<Contact />} />
           <Route path="treanding_product" element={<Treanding_Product />} />
           <Route path="finish_product_sell_details" element={<Finish_Product_Sell />} />
+
         </Route>
       </Routes>
     </>
