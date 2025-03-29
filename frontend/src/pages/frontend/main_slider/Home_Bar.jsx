@@ -24,7 +24,7 @@ export default function Home_Bar() {
           {loading && <p className="text-center">Loading...</p>}
           {error && <p className="text-red-500 text-center">{error}</p>}
           {!loading && !error && categories.length > 0 ? (
-            categories.map((cat, index) => (
+            categories.slice(0, 3).map((cat, index) => (
               <Link
                 className="hover:text-[#634C9F] hover:underline "
                 key={index} 
@@ -46,7 +46,6 @@ export default function Home_Bar() {
         </Link>
       </div>
 
-      {/* Right Section */}
       <div className="flex gap-x-6">
         <Link to="/trending_product" className="text-[#030712] hover:underline">
           Trending Products

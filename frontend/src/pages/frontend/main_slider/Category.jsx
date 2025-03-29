@@ -11,19 +11,19 @@ export default function Category() {
         {error && <p className="text-red-500 text-center">{error}</p>}
         {!loading && !error && (
           <ul className="border-t border-[#E5E7EB]">
-            {categories.length > 0 ? (
-              categories.map((cat, index) => (
-                <li
-                  key={index}
-                  className="h-[45px] mt-1 ml-1 px-2 flex items-center hover:bg-gray-200 cursor-pointer border-b border-[#E5E7EB]"
-                >
-                  {cat.name}
-                </li>
-              ))
-            ) : (
-              <p className="text-center text-gray-500">No categories found</p>
-            )}
-          </ul>
+          {categories.length > 0 ? (
+            categories.slice(0, 10).map((cat, index) => ( 
+              <li
+                key={index}
+                className="h-[45px] mt-1 ml-1 px-2 flex items-center hover:bg-gray-200 cursor-pointer border-b border-[#E5E7EB]"
+              >
+                {cat.name}
+              </li>
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No categories found</p>
+          )}
+        </ul>
         )}
       </div>
     </>
