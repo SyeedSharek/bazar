@@ -18,6 +18,7 @@ import All_Product from "../pages/frontend/product/All_Product";
 import Contact from "../pages/frontend/contact/Contact";
 import Treanding_Product from "../pages/frontend/product/Treanding_Product";
 import Finish_Product_Sell from "../pages/frontend/product/Finish_Product_Sell";
+import Payment from "../pages/frontend/payment/Payment";
 
 export const Router = () => {
   const location = useLocation();
@@ -54,6 +55,7 @@ export const Router = () => {
           <Route path="contact" element={<Contact />} />
           <Route path="treanding_product" element={<Treanding_Product />} />
           <Route path="finish_product_sell_details" element={<Finish_Product_Sell />} />
+          <Route path="payment" element={<Payment />} />
 
         </Route>
       </Routes>

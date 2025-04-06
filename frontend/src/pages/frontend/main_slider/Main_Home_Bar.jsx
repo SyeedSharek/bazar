@@ -6,15 +6,15 @@ import Slider from "./Slider";
 export default function Main_Home_Bar() {
   return (
     <>
-      <div className="flex ">
+      <div className="flex w-[1380px] ">
         <div>
           <Category />
         </div>
-        <div className="w-full">
+        <div className="w-[1380px]">
           <div>
             <Home_Bar />
           </div>
-          <div className="w-[full]">
+          <div className="">
             <Slider />
           </div>
         </div>

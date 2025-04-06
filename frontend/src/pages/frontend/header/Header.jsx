@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Header() {
   return (
-    <div className="flex justify-between items-center bg-[#634C9F] w-full h-[41px] px-6 font-inter">
+    <div className="flex justify-between items-center bg-[#634C9F] w-[1380px] h-[41px] px-6 font-inter">
       <div className="flex justify-center items-center w-full">
         <p className="text-white text-xs font-semibold tracking-tight">
           FREE Delivery & 40% Discount for Next 3 Orders! Place your first order
