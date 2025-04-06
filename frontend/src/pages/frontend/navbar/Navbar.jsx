@@ -11,7 +11,7 @@ export default function navbar() {
     <>
       <Top_Navbar />
 
-      <div className="flex items-center mt-4 h-[78px] px-8 max-w-8xl mx-auto border-b border-[#E5E7EB]">
+      <div className="flex w-[1380px] items-center mt-4 h-[78px] px-8 max-w-8xl mx-auto border-b border-[#E5E7EB]">
         {/* Logo & Location */}
         <div className="flex items-center w-[300px] gap-6">
           <div className="flex items-center gap-2">
