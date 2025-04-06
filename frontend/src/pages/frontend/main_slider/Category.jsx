@@ -6,7 +6,7 @@ export default function Category() {
   const { categories, loading, error } = Category_Api();
   return (
     <>
-      <div className="w-[300px] h-[507px] border  border-[#E5E7EB] overflow-hidden">
+      <div className="w-[300px] h-[555px] border  border-[#E5E7EB] overflow-hidden">
         {loading && <Loading />}
         {error && <p className="text-red-500 text-center">{error}</p>}
         {!loading && !error && (

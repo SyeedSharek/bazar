@@ -1,27 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import useSliderApi from "../../../api/slider/Slider_Api";
-import Loading from "../../../components/ui/Loading";
 import { Link } from "react-router-dom";
 
 export default function Slider() {
   const { sliders, loading, error } = useSliderApi();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Auto-slide every 5 seconds
+  useEffect(() => {
+    if (sliders.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) =>
+          prevIndex === sliders.length - 1 ? 0 : prevIndex + 1
+        );
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [sliders]);
 
   return (
     <div className="h-[482.42px] m-5 relative">
       {error && <p className="text-red-500 text-center">{error}</p>}
-      {!loading && !error && sliders.length > 0 ? (
-        sliders.map((slider, index) => (
-          <div key={index} className="relative">
-            {/* Text Overlay Section */}
+      {loading ? (
+        <p className="text-center text-gray-500">Loading sliders...</p>
+      ) : sliders.length > 0 ? (
+        <div className="relative">
+          <div
+            key={currentIndex}
+            className="relative transition-opacity duration-500 ease-in-out"
+          >
             <div
               className="absolute w-[455px] h-[321.17px] top-[60px] left-[60px] text-black px-6 py-4 rounded flex flex-col space-y-3"
               style={{
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                opacity: 0.9, // Slightly more visible
+                opacity: 0.9,
               }}
             >
-              {/* Weekend Discount Tag */}
               <p
                 className="w-[200px] h-[40px] text-[#166534] font-semibold text-md text-center flex items-center justify-center rounded"
                 style={{
@@ -75,12 +90,34 @@ export default function Slider() {
             </div>
 
             <img
-              className="w-[1032px] object-cover"
-              src={slider.image}
-              alt={`Slider ${index}`}
+              className="w-[1032px] h-[482.42px] object-cover transition-opacity duration-500 ease-in-out"
+              src={sliders[currentIndex]?.image}
+              alt={`Slider ${currentIndex}`}
             />
           </div>
-        ))
+
+          <button
+            className="absolute top-1/2 left-4 text-white p-2 rounded-full hover:bg-gray-600 "
+            onClick={() =>
+              setCurrentIndex((prevIndex) =>
+                prevIndex === 0 ? sliders.length - 1 : prevIndex - 1
+              )
+            }
+          >
+            <p className="text-black font-bold text-2xl">❮</p>
+          </button>
+
+          <button
+            className="absolute top-1/2 right-4 text-white p-2 rounded-full hover:bg-gray-600 "
+            onClick={() =>
+              setCurrentIndex((prevIndex) =>
+                prevIndex === sliders.length - 1 ? 0 : prevIndex + 1
+              )
+            }
+          >
+            <p className="text-black font-bold text-2xl">❯</p>
+          </button>
+        </div>
       ) : (
         <p className="text-center text-gray-500">No sliders available</p>
       )}
