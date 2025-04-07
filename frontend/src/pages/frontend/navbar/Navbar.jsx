@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Love_Icon from "../../../components/ui/icons/Love_Icon";
 import Cart_Icon from "../../../components/ui/icons/Cart_Icon";
 
-export default function navbar() {
+export default function Navbar() {
   return (
     <>
       <Top_Navbar />

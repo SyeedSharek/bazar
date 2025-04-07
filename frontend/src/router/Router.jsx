@@ -19,6 +19,7 @@ import Contact from "../pages/frontend/contact/Contact";
 import Treanding_Product from "../pages/frontend/product/Treanding_Product";
 import Finish_Product_Sell from "../pages/frontend/product/Finish_Product_Sell";
 import Payment from "../pages/frontend/payment/Payment";
+import NotFound from "../pages/NotFound";
 
 export const Router = () => {
   const location = useLocation();
@@ -28,10 +29,28 @@ export const Router = () => {
   return (
     <>
       <Routes>
-        <Route index element={<App />} />
+        {/* <Route index element={<App />} /> */}
+        <Route path="/*" element={<App />}>
+          <Route path="*" element={<NotFound />} />
+          <Route index element={<FrontDashboard />} />
+          <Route path="about" element={<About />} />
+          <Route path="customer_profile" element={<Customer_Profile />} />
+          <Route path="wishlist" element={<WishList />} />
+          <Route path="order" element={<Order_Tracking />} />
+          <Route path="register" element={<Register />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="all_product" element={<All_Product />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="treanding_product" element={<Treanding_Product />} />
+          <Route
+            path="finish_product_sell_details"
+            element={<Finish_Product_Sell />}
+          />
+          <Route path="payment" element={<Payment />} />
 
-        <Route path="login" element={<Login />} />
-        <Route path="forget-password" element={<ForgetPassword />} />
+          <Route path="login" element={<Login />} />
+          <Route path="forget-password" element={<ForgetPassword />} />
+        </Route>
 
         {/* dashboard related routes */}
         <Route path="admin" element={<ProtectedRoute />}>
@@ -42,22 +61,6 @@ export const Router = () => {
         </Route>
 
         {/* Frontend Router  */}
-
-        <Route path="/*">
-          <Route path="dashboard" element={<FrontDashboard />} />
-          <Route path="about" element={<About />} />
-          <Route path="customer_profile" element={<Customer_Profile />} />
-          <Route path="wishlist" element={<WishList />} />
-          <Route path="order" element={<Order_Tracking />} />
-          <Route path="register" element={<Register />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="all_product" element={<All_Product />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="treanding_product" element={<Treanding_Product />} />
-          <Route path="finish_product_sell_details" element={<Finish_Product_Sell />} />
-          <Route path="payment" element={<Payment />} />
-
-        </Route>
       </Routes>
     </>
   );

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Down_Arrow_Icon from "../../../components/ui/icons/Down_Arrow_Icon";
 
 export default function Top_Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isOpenPrice, setIsOpenPrice] = useState(false);
   const dropdownRef = useRef(null);
   const dropdownPriceRef = useRef(null);
@@ -27,7 +27,7 @@ export default function Top_Navbar() {
   }, []);
   return (
     <>
-      <div className="flex justify-between items-center w-full px-4 py-2 border-b border-[#E5E7EB]">
+      <div className="flex justify-between items-center w-[1380px] mx-auto px-4 py-2 border-b border-[#E5E7EB]">
         <div className="flex items-center gap-6">
           <Link to="/about">About</Link>
           <Link to="/customer_profile">Account</Link>
@@ -72,7 +72,10 @@ export default function Top_Navbar() {
           </div>
 
           {/* Currency Dropdown */}
-          <div className="relative inline-block text-left" ref={dropdownPriceRef}>
+          <div
+            className="relative inline-block text-left"
+            ref={dropdownPriceRef}
+          >
             <button
               onClick={() => setIsOpenPrice(!isOpenPrice)}
               className="flex items-center text-sm text-[#6B7280] focus:outline-none"
@@ -100,14 +103,15 @@ export default function Top_Navbar() {
           </div>
 
           <div>
-            <Link to="/frontend/order" className=" w-[81.35x] text-sm text-gray-700">
+            <Link
+              to="/frontend/order"
+              className=" w-[81.35x] text-sm text-gray-700"
+            >
               Order Tracking
             </Link>
           </div>
         </div>
       </div>
-
-      
     </>
-  )
+  );
 }

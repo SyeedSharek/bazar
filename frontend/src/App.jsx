@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import FrontDashboard from './pages/frontend/dashboard/FrontDashboard'
+import { Outlet } from "react-router-dom";
+import "./App.css";
+import Header from "./pages/frontend/header/Header";
+import Navbar from "./pages/frontend/navbar/Navbar";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <FrontDashboard />
+      <Header />
+      <Navbar />
+      <Outlet />
+      {/* footer will be here */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

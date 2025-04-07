@@ -4,8 +4,7 @@ import { BrowserRouter } from "react-router";
 import { Toaster } from "react-hot-toast";
 import "./index.css";
 import "./App.css";
-
-import { Router } from "./router/router";
+import { Router } from "./router/Router";
 
 const root = document.getElementById("root");
 

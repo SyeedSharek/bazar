@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "../header/Header";
-import Navbar from "../navbar/navbar";
 import Main_Home_Bar from "../main_slider/Main_Home_Bar";
 import OrderStatus from "../order_status/OrderStatus";
 import WeekendBanner from "../main_slider/WeekendBanner";
@@ -12,8 +10,6 @@ export default function FrontDashboard() {
   return (
     <>
       <div className="max-w-7xl mx-auto">
-        <Header  />
-        <Navbar />
         <Main_Home_Bar />
         <OrderStatus />
         <WeekendBanner />
