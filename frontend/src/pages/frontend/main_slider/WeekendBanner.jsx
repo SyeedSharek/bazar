@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function WeekendBanner() {
   return (
     <>
-      <div className="flex justify-between w-[1359.99px] h-[220.41px] ">
+      <div className="flex justify-between w-[1359.99px] h-[220.41px] mb-8">
         <div>
           <div className="relative w-[433.33px] h-[220.41px] rounded-[6px] overflow-hidden mt-8">
             <img
