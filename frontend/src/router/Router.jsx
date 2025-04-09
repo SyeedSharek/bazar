@@ -20,6 +20,7 @@ import Treanding_Product from "../pages/frontend/product/Treanding_Product";
 import Finish_Product_Sell from "../pages/frontend/product/Finish_Product_Sell";
 import Payment from "../pages/frontend/payment/Payment";
 import NotFound from "../pages/NotFound";
+import Add_To_Cart from "../pages/frontend/cart/Add_To_Cart";
 
 export const Router = () => {
   const location = useLocation();
@@ -50,6 +51,7 @@ export const Router = () => {
 
           <Route path="login" element={<Login />} />
           <Route path="forget-password" element={<ForgetPassword />} />
+          <Route path="cart" element={<Add_To_Cart />} />
         </Route>
 
         {/* dashboard related routes */}

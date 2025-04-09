@@ -76,7 +76,7 @@ export default function NewArrivalProduct() {
                 </div>
 
                 <Link
-                  to=""
+                  to="/cart"
                   className="w-full h-[34px] rounded-xl border border-[#634C9F] flex items-center justify-center font-inter font-medium text-md tracking-tight text-[#634C9F]"
                 >
                   <div className="flex items-center space-x-2">
