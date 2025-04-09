@@ -6,6 +6,7 @@ import NewArrivalProduct from "../product/NewArrivalProduct";
 import Best_Seller_Product from "../product/Best_Seller_Product";
 import Popular_Companies from "../companies/Popular_Companies";
 import Main_Footer from "../footer/Main_Footer";
+import Add_To_Cart from "../cart/Add_To_Cart";
 
 export default function FrontDashboard() {
   return (
@@ -17,6 +18,7 @@ export default function FrontDashboard() {
         <NewArrivalProduct />
         <Best_Seller_Product />
         <Popular_Companies />
+        {/* <Add_To_Cart /> */}
         
       </div>
     </>
