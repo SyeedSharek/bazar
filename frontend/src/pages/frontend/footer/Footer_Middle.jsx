@@ -36,9 +36,11 @@ export default function Footer_Middle() {
             </div>
             <div className="ml-3">
               <p className="text-sm text-gray-600 font-inter font-normal tracking-tight leading-[19.51px]">
-              Need help with your order?
+                Need help with your order?
               </p>
-              <p className="text-xl font-bold tracking-tight">info@example.com</p>
+              <p className="text-xl font-bold tracking-tight">
+                info@example.com
+              </p>
             </div>
           </div>
         </div>
