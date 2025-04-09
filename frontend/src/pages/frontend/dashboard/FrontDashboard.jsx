@@ -17,7 +17,7 @@ export default function FrontDashboard() {
         <NewArrivalProduct />
         <Best_Seller_Product />
         <Popular_Companies />
-        <Main_Footer />
+        
       </div>
     </>
   );
