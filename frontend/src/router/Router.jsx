@@ -56,7 +56,8 @@ export const Router = () => {
           <Route path="forget-password" element={<ForgetPassword />} />
           
 
-          <Route path="single_product" element={<SingleProduct />} />
+          <Route path="single_product/:id" element={<SingleProduct />} />
+
 
         </Route>
         <Route path="login" element={<Login />} />

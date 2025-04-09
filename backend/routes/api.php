@@ -41,3 +41,4 @@ Route::middleware(['jwt:api'])->group(function () {
 Route::get('frontend/categories', [CategoryController::class, 'all_category']);
 Route::get('frontend/sliders',[SliderController::class,'all_slider']);
 Route::get('frontend/products',[ProductController::class,'latest_products']);
+Route::get('frontend/all/products',[ProductController::class,'index']);
