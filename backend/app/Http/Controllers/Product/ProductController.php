@@ -15,6 +15,7 @@ use App\Traits\UploadImageTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\FuncCall;
 
 class ProductController extends Controller
 {
@@ -28,33 +29,14 @@ class ProductController extends Controller
         return Response::success($product);
     }
 
-    // public function index()
-    // {
-    //     $products = Product::with(['productImages', 'category', 'subCategory', 'brand'])
-    //         ->latest()
-    //         ->paginate(10);
+    public function latest_products(){
+        $product = Product::with( 'category', 'subCategory', 'brand')
+        ->latest()
+        ->take(6)
+        ->get();
+        return Response::success($product);
+    }
 
-    //     return Response::success($products->map(function ($product) {
-    //         return [
-    //             'id' => $product->id,
-    //             'name' => $product->name,
-    //             'old_price' => $product->old_price,
-    //             'new_price' => $product->new_price,
-    //             'description' => $product->description,
-    //             'quantity' => $product->quantity,
-    //             'discount' => $product->discount,
-    //             'product_images' => $product->productImages->map(function ($image) {
-    //                 return [
-    //                     'id' => $image->id,
-    //                     'product_id' => $image->product_id,
-    //                     'image_url' => asset('storage/' . $image->image_path),
-    //                 ];
-    //             }),
-    //             'created_at' => $product->created_at,
-    //             'updated_at' => $product->updated_at,
-    //         ];
-    //     }));
-    // }
 
 
 
@@ -158,4 +140,20 @@ class ProductController extends Controller
         $product->delete();
         return Response::success(message: 'Product deleted successfully');
     }
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
