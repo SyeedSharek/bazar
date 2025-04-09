@@ -9,7 +9,7 @@ export default function Home_Bar() {
     <div className="flex justify-between items-center w-full p-4 border-b border-[#E5E7EB] bg-white text-sm font-semibold">
       {/* Left Section */}
       <div className="flex gap-x-6">
-        <Link to="/dashboard" className="hover:text-[#634C9F] hover:underline">
+        <Link to="/" className="hover:text-[#634C9F] hover:underline">
           Home
         </Link>
         <Link
@@ -19,7 +19,6 @@ export default function Home_Bar() {
           Shop
         </Link>
 
-      
         <div className="flex gap-x-6 w-[400px] overflow-hidden ">
           {loading && <p className="text-center">Loading...</p>}
           {error && <p className="text-red-500 text-center">{error}</p>}
@@ -27,7 +26,7 @@ export default function Home_Bar() {
             categories.slice(0, 3).map((cat, index) => (
               <Link
                 className="hover:text-[#634C9F] hover:underline "
-                key={index} 
+                key={index}
                 to={`/category/${cat.id}`}
               >
                 {cat.name.charAt(0).toUpperCase() + cat.name.slice(1)}
