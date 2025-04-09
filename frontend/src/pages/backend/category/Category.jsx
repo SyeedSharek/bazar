@@ -58,7 +58,7 @@ const Category = () => {
         </ol>
       </nav>
       {/* breadcrumb */}
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-8 container mx-auto">
+      <div className="relative overflow-y-auto shadow-md sm:rounded-lg my-8 container mx-auto">
         <div className="py-4 px-4 bg-white rounded-xl my-4 flex justify-between items-center">
           <div>
             <p className="font-poppins font-semibold text-2xl"> Category</p>

@@ -11,7 +11,6 @@ function App() {
       <Navbar />
       <Outlet />
       <Main_Footer />
-      {/* footer will be here */}
     </>
   );
 }
