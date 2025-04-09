@@ -277,7 +277,7 @@ export default function NewArrivalProduct() {
               </div>
 
               <p className="w-[200.96px] h-[35.18px] font-inter font-medium text-[14px] mb-4">
-                Great Value Rising Crust Frozen Pizza, Supreme
+                Great Value Rising Crust Frozen Pizza, Supremer
               </p>
               <div className="flex items-center">
                 <p className="font-barlow font-bold text-[22px] tracking-normal text-[#DC2626] mr-2">
