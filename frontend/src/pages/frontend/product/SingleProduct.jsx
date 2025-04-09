@@ -7,6 +7,7 @@ import { TbShoppingBag } from "react-icons/tb";
 import { MdOutlinePayment } from "react-icons/md";
 import { GoShieldCheck } from "react-icons/go";
 import { Tab, Tabs } from "../../../components/Tab";
+import ImageGallery from "./../../../components/ImageGallery";
 
 const SingleProduct = () => {
   const [count, setCount] = useState(1);
@@ -26,10 +27,21 @@ const SingleProduct = () => {
       </>
     );
   };
+  const productImages = [
+    "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500",
+    "https://images.unsplash.com/photo-1601758003122-53c40e686a19?w=500",
+    "https://images.unsplash.com/photo-1601924638867-3a6de6b7a500?w=500",
+    "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500",
+    "https://images.unsplash.com/photo-1601758003122-53c40e686a19?w=500",
+    "https://images.unsplash.com/photo-1601924638867-3a6de6b7a500?w=500",
+    "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500",
+    "https://images.unsplash.com/photo-1601758003122-53c40e686a19?w=500",
+    "https://images.unsplash.com/photo-1601924638867-3a6de6b7a500?w=500",
+  ];
   return (
     <>
       <div className="max-w-7xl mx-auto grid grid-cols-2 justify-between items-center gap-5 my-12">
-        adf
+        <ImageGallery images={productImages} />
         <div className=" flex flex-col gap-5">
           <h2 className="text-4xl font-semibold">
             Marketside Fresh Organic Bananas, Bunch
@@ -125,7 +137,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         <Tabs>
           <Tab title="Description">
             <p className="text-sm text-gray-700">

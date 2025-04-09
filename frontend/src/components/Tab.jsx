@@ -4,7 +4,7 @@ const Tabs = ({ children }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="">
+    <div>
       {/* Tab headers */}
       <div className="flex border-b border-gray-200">
         {React.Children.map(children, (child, index) => (

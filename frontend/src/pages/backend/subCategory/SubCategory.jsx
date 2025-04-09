@@ -5,7 +5,7 @@ export default function SubCategory() {
   const apiUrl = import.meta.env.VITE_BACKEND_API;
   const { data, isLoading, error } = useFetch(`${apiUrl}/subcategories`);
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="relative overflow-y-auto shadow-md sm:rounded-lg">
       <div>
         <div>
           <p>Sub Category</p>
