@@ -49,10 +49,9 @@ export const Router = () => {
           />
           <Route path="payment" element={<Payment />} />
           <Route path="single_product" element={<SingleProduct />} />
-
-          <Route path="login" element={<Login />} />
-          <Route path="forget-password" element={<ForgetPassword />} />
         </Route>
+        <Route path="login" element={<Login />} />
+        <Route path="forget-password" element={<ForgetPassword />} />
 
         {/* dashboard related routes */}
         <Route path="admin" element={<ProtectedRoute />}>

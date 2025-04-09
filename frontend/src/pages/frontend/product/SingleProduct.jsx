@@ -6,17 +6,11 @@ import { HiOutlineMinus } from "react-icons/hi";
 import { TbShoppingBag } from "react-icons/tb";
 import { MdOutlinePayment } from "react-icons/md";
 import { GoShieldCheck } from "react-icons/go";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
-// import "swiper/css";
-// import "swiper/css/free-mode";
-// import "swiper/css/navigation";
-// import "swiper/css/thumbs";
-// import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { Tab, Tabs } from "../../../components/Tab";
 
 const SingleProduct = () => {
   const [count, setCount] = useState(1);
-  // const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   const renderer = ({ hours, minutes, seconds }) => {
     return (
       <>
@@ -36,88 +30,6 @@ const SingleProduct = () => {
     <>
       <div className="max-w-7xl mx-auto grid grid-cols-2 justify-between items-center gap-5 my-12">
         adf
-        {/* <Swiper
-          style={{
-            "--swiper-navigation-color": "#fff",
-            "--swiper-pagination-color": "#fff",
-          }}
-          spaceBetween={10}
-          navigation={true}
-          thumbs={{ swiper: thumbsSwiper }}
-          modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper2"
-        >
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-          </SwiperSlide>
-        </Swiper>
-        <Swiper
-          onSwiper={setThumbsSwiper}
-          spaceBetween={10}
-          slidesPerView={4}
-          freeMode={true}
-          watchSlidesProgress={true}
-          modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper"
-        >
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-          </SwiperSlide>
-        </Swiper> */}
         <div className=" flex flex-col gap-5">
           <h2 className="text-4xl font-semibold">
             Marketside Fresh Organic Bananas, Bunch
@@ -212,6 +124,38 @@ const SingleProduct = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="max-w-7xl mx-auto">
+        <Tabs>
+          <Tab title="Description">
+            <p className="text-sm text-gray-700">
+              Quisque varius diam vel metus mattis, id aliquam diam rhoncus.
+              Proin vitae magna in dui finibus malesuada et at nulla. Morbi elit
+              ex, viverra vitae ante vel, blandit feugiat ligula. Fusce
+              fermentum iaculis nibh, at sodales leo maximus a. Nullam ultricies
+              sodales nunc, in pellentesque lorem mattis quis. Cras imperdiet
+              est in nunc tristique lacinia. Nullam aliquam mauris eu accumsan
+              tincidunt. Suspendisse velit ex, aliquet vel ornare vel, dignissim
+              a tortor.
+            </p>
+            <p className="mt-4 text-sm text-gray-700">
+              Morbi ut sapien vitae odio accumsan gravida. Morbi vitae erat
+              auctor, eleifend nunc a, lobortis neque. Praesent aliquam
+              dignissim viverra. Maecenas lacus odio, feugiat eu nunc sit amet,
+              maximus sagittis dolor. Vivamus nisi sapien, elementum sit amet
+              eros sit amet, ultricies cursus ipsum. Sed consequat luctus
+              ligula. Curabitur laoreet rhoncus blandit. Aenean vel diam ut arcu
+              pharetra dignissim ut sed leo. Vivamus faucibus, ipsum in
+              vestibulum vulputate, lorem orci convallis quam, sit amet
+              consequat nulla felis pharetra lacus. Duis semper erat mauris, sed
+              egestas purus commodo vel.
+            </p>
+          </Tab>
+          <Tab title="Review">
+            <h2 className="text-xl font-bold mb-4">User Review</h2>
+            <p>Manage your account preferences here.</p>
+          </Tab>
+        </Tabs>
       </div>
     </>
   );
