@@ -1,7 +1,7 @@
 import React from "react";
 import Email_Icon from "../../../components/ui/icons/Email_Icon";
 
-export default function () {
+export default function Footer_Header() {
   return (
     <>
       <div className="flex  justify-between w-[1360px] h-[120.299px] mt-[70px]">
