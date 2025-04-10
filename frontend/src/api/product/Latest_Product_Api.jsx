@@ -12,7 +12,7 @@ export default function Latest_Product_Api() {
         .get(`${apiUrl}/frontend/products`)
         .then((response) => {
           setLatestProduct(response.data.data);
-          console.log(response.data.data);
+          
           setLoading(false);
         })
         .catch((error) => {

@@ -46,7 +46,7 @@ const SingleProduct = () => {
               key={index}
               className="grid md:grid-cols-2 gap-10 items-start my-12"
             >
-              <ImageGallery images={productImages} />
+              <ImageGallery images={product.image_urls || []} />
 
               <div className="flex flex-col gap-5">
                 <h2 className="text-4xl font-semibold">
