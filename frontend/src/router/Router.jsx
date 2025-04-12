@@ -22,7 +22,7 @@ import Payment from "../pages/frontend/payment/Payment";
 import NotFound from "../pages/NotFound";
 
 import SingleProduct from "./../pages/frontend/product/SingleProduct";
-
+import Add_To_Cart from "./../pages/frontend/cart/Add_To_Cart";
 
 export const Router = () => {
   const location = useLocation();
@@ -51,14 +51,8 @@ export const Router = () => {
           />
           <Route path="payment" element={<Payment />} />
 
-
-          <Route path="login" element={<Login />} />
-          <Route path="forget-password" element={<ForgetPassword />} />
-          
-
           <Route path="single_product/:id" element={<SingleProduct />} />
-
-
+          <Route path="cart" element={<Add_To_Cart />} />
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="forget-password" element={<ForgetPassword />} />

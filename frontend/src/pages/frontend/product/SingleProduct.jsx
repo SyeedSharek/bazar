@@ -30,12 +30,6 @@ const SingleProduct = () => {
     </>
   );
 
-  const productImages = [
-    "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500",
-    "https://images.unsplash.com/photo-1601758003122-53c40e686a19?w=500",
-    "https://images.unsplash.com/photo-1601924638867-3a6de6b7a500?w=500",
-  ];
-
   return (
     <>
       {loading && <Loading />}
@@ -71,9 +65,7 @@ const SingleProduct = () => {
                   </div>
                 </div>
 
-                <p className="text-gray text-md">
-                  {product.brand.name}
-                </p>
+                <p className="text-gray text-md">{product.brand.name}</p>
 
                 <div className="inline-flex gap-3 items-end">
                   <p className="text-red-500 font-bold text-4xl font-roboto">
@@ -144,21 +136,16 @@ const SingleProduct = () => {
                 </div>
               </div>
             </div>
-
-
-
-
           ))}
 
           {/* Tabs */}
-          
+
           <div className="w-full">
             <Tabs>
               <Tab title="Description">
                 <p className="text-sm text-gray-700">
                   Quisque varius diam vel metus mattis...
                 </p>
-                
               </Tab>
               <Tab title="Review">
                 <h2 className="text-xl font-bold mb-4">User Review</h2>
