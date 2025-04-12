@@ -23,6 +23,7 @@ import NotFound from "../pages/NotFound";
 
 import SingleProduct from "./../pages/frontend/product/SingleProduct";
 import Add_To_Cart from "./../pages/frontend/cart/Add_To_Cart";
+import AddCategory from "../pages/backend/category/AddCategory";
 
 export const Router = () => {
   const location = useLocation();
@@ -62,6 +63,7 @@ export const Router = () => {
           <Route path="*" element={<NotFound />} />
           <Route index path="dashboard" element={<Dashboard />} />
           <Route path="category" element={<Category />} />
+          <Route path="add-category" element={<AddCategory />} />
           <Route path="subCategory" element={<SubCategory />} />
         </Route>
 
