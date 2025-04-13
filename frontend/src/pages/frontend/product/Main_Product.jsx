@@ -2,36 +2,33 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Cart_Icon from "../../../components/ui/icons/Cart_Icon";
 import Loading from "../../../components/ui/Loading";
-import Latest_Product_Api from "../../../api/product/Latest_Product_Api";
+
+import Product_Api from "../../../api/product/Product_Api";
+import Slider from "../main_slider/Slider";
 
 
-export default function NewArrivalProduct() {
-  const { latestProduct, loading, error } = Latest_Product_Api();
+export default function Main_Product() {
 
+
+  const { product,loading,error } = Product_Api();
   return (
+    <>
     <div className="mt-[60px] w-[1360px]">
-      <div className="flex justify-between">
-        <div className="flex items-center">
-          <p className="mr-3 font-inter font-bold text-[18px] tracking-tight text-[#030712]">
-            New Arrivals
-          </p>
-          <p className="font-inter font-medium text-[12px] tracking-tight text-[#6B7280]">
-            Don't miss this opportunity at a special discount just for this week
-          </p>
+      <div className="flex">
+        <div>
+         
         </div>
 
-        <Link
-          to="all_product"
-          className="w-[97.53px] h-[34px] rounded-xl bg-white border border-[#E5E7EB] flex items-center justify-center text-sm font-medium text-gray-700 hover:bg-gray-100"
-        >
-          View All →
-        </Link>
+      </div>
+      <div className=" w-full">
+        <Slider />
+        
       </div>
 
       <div className="mt-3 overflow-hidden flex flex-wrap gap-4">
         {loading && <Loading />}
-        {!loading && !error && latestProduct.length > 0 &&
-          latestProduct.map((product) => (
+        {!loading && !error && product.length > 0 &&
+          product.map((product) => (
             <div
               key={product.id}
               className="w-[227px] h-[379.38px] bg-white shadow rounded-lg p-2 relative"
@@ -86,5 +83,6 @@ export default function NewArrivalProduct() {
           ))}
       </div>
     </div>
-  );
+    </>
+  )
 }

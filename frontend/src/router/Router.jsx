@@ -57,6 +57,7 @@ export const Router = () => {
           
 
           <Route path="single_product/:id" element={<SingleProduct />} />
+          <Route path="all_product" element={<All_Product /> } />
 
 
         </Route>
