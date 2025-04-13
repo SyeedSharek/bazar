@@ -10,9 +10,8 @@ export default function Product_Api() {
       setLoading(true);
       axios
         .get(`${apiUrl}/frontend/all/products`)
-        .then((response) => {
-          console.log(response.data.data);
-          setLatestProduct(response.data.data);
+        .then((response) => {        
+          setLatestProduct(response.data.data.data);
           setLoading(false);
         })
         .catch((error) => {

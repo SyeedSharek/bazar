@@ -53,7 +53,13 @@ export const Router = () => {
           <Route path="payment" element={<Payment />} />
 
           <Route path="single_product/:id" element={<SingleProduct />} />
+
+          <Route path="all_product" element={<All_Product /> } />
+
+
+
           <Route path="cart" element={<Add_To_Cart />} />
+
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="forget-password" element={<ForgetPassword />} />
