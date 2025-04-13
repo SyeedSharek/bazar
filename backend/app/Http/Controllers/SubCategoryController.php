@@ -17,13 +17,20 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $data = SubCategory::latest()->get(['id', 'name', 'slug', 'image', 'status',]);
+        $data = SubCategory::latest()->get(['id', 'name', 'slug', 'image', 'status']);
         if (count($data) > 0) {
             return Response::success($data);
         }
         return Response::notFound();
     }
 
+    public function category_wish_subcategory($category_id){
+        $data = SubCategory::where('category_id', $category_id)->get(['id', 'name', 'slug', 'image', 'status']);
+        if (count($data) > 0) {
+            return Response::success($data);
+        }
+        return Response::notFound();
+    }
     /**
      * Store a newly created resource in storage.
      */
