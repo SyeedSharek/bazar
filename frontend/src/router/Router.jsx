@@ -22,7 +22,8 @@ import Payment from "../pages/frontend/payment/Payment";
 import NotFound from "../pages/NotFound";
 
 import SingleProduct from "./../pages/frontend/product/SingleProduct";
-
+import Add_To_Cart from "./../pages/frontend/cart/Add_To_Cart";
+import AddCategory from "../pages/backend/category/AddCategory";
 
 export const Router = () => {
   const location = useLocation();
@@ -51,14 +52,13 @@ export const Router = () => {
           />
           <Route path="payment" element={<Payment />} />
 
-
-          <Route path="login" element={<Login />} />
-          <Route path="forget-password" element={<ForgetPassword />} />
-          
-
           <Route path="single_product/:id" element={<SingleProduct />} />
+
           <Route path="all_product" element={<All_Product /> } />
 
+
+
+          <Route path="cart" element={<Add_To_Cart />} />
 
         </Route>
         <Route path="login" element={<Login />} />
@@ -69,6 +69,7 @@ export const Router = () => {
           <Route path="*" element={<NotFound />} />
           <Route index path="dashboard" element={<Dashboard />} />
           <Route path="category" element={<Category />} />
+          <Route path="add-category" element={<AddCategory />} />
           <Route path="subCategory" element={<SubCategory />} />
         </Route>
 

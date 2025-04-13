@@ -1,71 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import PrimaryButton from "../../../components/ui/buttons/PrimaryButton";
-import axios from "axios";
 import Loading from "../../../components/ui/Loading";
+const apiUrl = import.meta.env.VITE_BACKEND_API;
+import useFetch from "./../../../hooks/customHooks/useFetch";
+import { toast } from "react-hot-toast";
+import BreadCrumb from "../../../components/BreadCrumb";
 
 const Category = () => {
-  const apiUrl = import.meta.env.VITE_BACKEND_API;
-  const token = localStorage.getItem("token");
-  const [category, setCategory] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data, isLoading, error } = useFetch(
+    `${apiUrl}/categories?paginate=15`
+  );
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios(`${apiUrl}/categories?paginate=15`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response?.data?.status === true) {
-          setIsLoading(false);
-          setCategory(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCategories();
-  }, [apiUrl, token]);
+  if (error) {
+    toast.error(error);
+  }
+  const breadCrumbs = [
+    {
+      name: "Category",
+      url: "/admin/category",
+    },
+  ];
+
   return (
     <>
-      {/* breadcrumb */}
-      <nav className="flex">
-        <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-          <li className="inline-flex items-center gap-2">
-            <FaHome size={16} />
-            <Link
-              to="/admin/dashboard"
-              className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary "
-            >
-              Home
-            </Link>
-          </li>
-          <IoIosArrowForward size={16} />
-          <li className="inline-flex items-center gap-2">
-            <Link
-              to="/admin/category"
-              className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary "
-            >
-              Category
-            </Link>
-          </li>
-        </ol>
-      </nav>
-      {/* breadcrumb */}
+      <BreadCrumb data={breadCrumbs} />
       <div className="relative overflow-y-auto shadow-md sm:rounded-lg my-8 container mx-auto">
         <div className="py-4 px-4 bg-white rounded-xl my-4 flex justify-between items-center">
           <div>
             <p className="font-poppins font-semibold text-2xl"> Category</p>
           </div>
-          <PrimaryButton className="text-sm hover:bg-hover cursor-pointer">
-            Add Category
-          </PrimaryButton>
+          <Link to={"/admin/add-category"}>
+            <PrimaryButton className="text-sm hover:bg-hover cursor-pointer">
+              Add Category
+            </PrimaryButton>
+          </Link>
         </div>
         {isLoading && (
           <div className="w-full h-[50vh] flex justify-center">
@@ -101,7 +72,7 @@ const Category = () => {
           </thead>
           <tbody className="min-h-[50vh] overflow-y-auto">
             {!isLoading &&
-              category?.data.map((item, index) => (
+              data?.data?.data?.data.map((item, index) => (
                 <tr
                   key={index}
                   className="bg-white border-b border-gray-200 hover:bg-gray-50 "
