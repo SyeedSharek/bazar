@@ -24,6 +24,8 @@ import NotFound from "../pages/NotFound";
 import SingleProduct from "./../pages/frontend/product/SingleProduct";
 import Add_To_Cart from "./../pages/frontend/cart/Add_To_Cart";
 import AddCategory from "../pages/backend/category/AddCategory";
+import Product from "../pages/backend/product/Product";
+import AddProduct from "../pages/backend/product/AddProduct";
 
 export const Router = () => {
   const location = useLocation();
@@ -65,6 +67,8 @@ export const Router = () => {
           <Route path="category" element={<Category />} />
           <Route path="add-category" element={<AddCategory />} />
           <Route path="subCategory" element={<SubCategory />} />
+          <Route path="product" element={<Product />} />
+          <Route path="add-product" element={<AddProduct />} />
         </Route>
 
         {/* Frontend Router  */}

@@ -21,6 +21,11 @@ export default function Sidebar() {
       name: "Sub Category",
       icon: <BiCategoryAlt size={18} />,
     },
+    {
+      url: "/admin/product",
+      name: "Product",
+      icon: <BiCategoryAlt size={18} />,
+    },
   ];
 
   return (
