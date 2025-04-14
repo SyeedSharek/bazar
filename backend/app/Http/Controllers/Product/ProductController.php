@@ -41,6 +41,11 @@ class ProductController extends Controller
             ->get();
         return Response::success($product);
     }
+    public function subcategoryWishProducts($subcategory_id)
+    {
+        $products = Product::where('sub_category_id', $subcategory_id)->paginate(20);
+        return response()->json(['data' => $products]);
+    }
 
 
 

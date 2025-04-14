@@ -45,3 +45,4 @@ Route::get('frontend/products',[ProductController::class,'latest_products']);
 Route::get('frontend/all/products',[ProductController::class,'index']);
 Route::post('frontend/product/order',[ProductController::class,'product_order']);
 Route::get('frontend/categoryWish/subcategory/{category_id}',[SubCategoryController::class,'category_wish_subcategory']);
+Route::get('/frontend/subcategoryWish/products/{subcategory_id}', [ProductController::class, 'subcategoryWishProducts']);

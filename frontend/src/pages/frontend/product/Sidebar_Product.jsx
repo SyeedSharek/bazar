@@ -2,16 +2,25 @@ import React, { useState } from "react";
 import Category_Api from "../../../api/cateogry/Category_Api";
 import Loading from "../../../components/ui/Loading";
 import SubCategory_Api from "../../../api/subcategory/SubCategory_Api";
+import { Link } from "react-router-dom";
 
 export default function () {
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(1000);
+  const [activeCategoryId, setActiveCategoryId] = useState(null);
 
-  // Assuming max value range is $1000 for the bar
+  const { categories, loading, error } = Category_Api();
+  const { subCategories, loading: subLoading } =
+    SubCategory_Api(activeCategoryId);
+
+  const handleCategoryClick = (categoryId) => {
+    setActiveCategoryId((prev) => (prev === categoryId ? null : categoryId));
+  };
+
+
+
   const minPercent = (min / 1000) * 100;
   const maxPercent = (max / 1000) * 100;
-  const { categories, loading, error } = Category_Api();
-  const {subCategories } = SubCategory_Api();
   return (
     <>
       <div className="w-[350px] h-[693.39px] -2">
@@ -56,42 +65,54 @@ export default function () {
 
         <div>
           <p>Product Category</p>
-          <div className="w-[300px] h-[555px] border  border-[#E5E7EB] overflow-auto ">
-            {loading && <Loading />}
-            {error && <p className="text-red-500 text-center">{error}</p>}
-            {!loading && !error && (
-              <ul className="border-t border-[#E5E7EB]">
-                {categories.length > 0 ? (
-                  categories.map((cat, index) => (
-                    <div>
-                        <div className="flex justify-between border-b border-[#E5E7EB]">
-                      <div className="h-[45px] mt-1 ml-1 px-2 flex items-center hover:bg-gray-200 cursor-pointer ">
-                        <li key={index} className="">
-                          {cat.name}
-                        </li>
+          {/* Category List */}
+          <div className="mt-4 px-4">
+            <p className="font-semibold mb-2">Product Category</p>
+            <div className="w-full h-[480px] border border-[#E5E7EB] overflow-auto">
+              {loading && <Loading />}
+              {error && <p className="text-red-500 text-center">{error}</p>}
+              {!loading && !error && (
+                <ul className="border-t border-[#E5E7EB]">
+                  {categories.map((cat) => (
+                    <li key={cat.id}>
+                      <div
+                        className="flex justify-between items-center h-[45px] px-3 hover:bg-gray-100 cursor-pointer border-b border-[#E5E7EB]"
+                        onClick={() => handleCategoryClick(cat.id)}
+                      >
+                        <span>{cat.name}</span>
+                        <button>
+                          {activeCategoryId === cat.id ? "-" : "+"}
+                        </button>
                       </div>
-                      <div>
-                        <button>+</button>
-                      </div>
-                      
 
-                    </div>
-                    <div className="h-[45px] mt-1 ml-6 px-2 flex items-center hover:bg-gray-200 cursor-pointer ">
-                        <li key={index} className="">
-                          {cat.name}
-                        </li>
-                      </div>
-                    </div>
-                  
-                    
-                  ))
-                ) : (
-                  <p className="text-center text-gray-500">
-                    No categories found
-                  </p>
-                )}
-              </ul>
-            )}
+                      {/* Subcategories */}
+                      {activeCategoryId === cat.id && (
+                        <div className="pl-6 pb-2">
+                          {subLoading ? (
+                            <p className="text-gray-500 text-sm">Loading...</p>
+                          ) : subCategories.length > 0 ? (
+                            subCategories.map((subCat) => (
+                              <Link
+                              to={`/subcategory-products/${subCat.id}`}
+                              key={subCat.id}
+                              onClick={() => handleSubCategoryProduct(subCat.id)}
+                              className="h-[38px] flex items-center px-2 hover:bg-gray-200 cursor-pointer text-sm"
+                            >
+                              {subCat.name}
+                            </Link>
+                            ))
+                          ) : (
+                            <p className="text-gray-400 text-sm">
+                              No subcategories
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         </div>
       </div>
