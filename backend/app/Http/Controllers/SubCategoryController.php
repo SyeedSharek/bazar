@@ -25,11 +25,10 @@ class SubCategoryController extends Controller
     }
 
     public function category_wish_subcategory($category_id){
-        $data = SubCategory::where('category_id', $category_id)->get(['id', 'name', 'slug', 'image', 'status']);
-        if (count($data) > 0) {
-            return Response::success($data);
-        }
-        return Response::notFound();
+
+        $categories = SubCategory::where('category_id', $category_id)->get(['id', 'name', 'slug', 'image', 'status']);
+
+    return response()->json(['data' => $categories]);
     }
     /**
      * Store a newly created resource in storage.

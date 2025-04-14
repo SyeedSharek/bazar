@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function useSubCategoryApi(categoryId) {
+export default function SubCategory_Api(category_id) {
   const apiUrl = import.meta.env.VITE_BACKEND_API;
   const [subCategories, setSubCategories] = useState([]);
   const [loading, setLoading] = useState(false);
