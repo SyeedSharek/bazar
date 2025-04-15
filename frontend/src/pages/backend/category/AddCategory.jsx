@@ -3,23 +3,45 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import PrimaryButton from "../../../components/ui/buttons/PrimaryButton";
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 import { useFormik } from "formik";
-import useFormikSubmit from "./../../../hooks/customHooks/useFormikSubmit";
 import ErrorMessage from "../../../components/ErrorMessage";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddCategory = () => {
-  const { fetchData, data, isLoading, error } = useFormikSubmit(); // Initialize hook
-
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const token = localStorage.getItem("token");
   const [image, setImage] = useState("");
   const formik = useFormik({
     initialValues: {
       name: "",
-      image: "",
+      image: null,
       description: "",
     },
     onSubmit: async (values, { resetForm }) => {
-      await fetchData(`${apiUrl}/categories`, "POST", values);
-      resetForm(values);
-      setImage("");
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("image", values.image);
+      formData.append("description", values.description);
+      try {
+        const response = await axios.post(`${apiUrl}/categories`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response?.data?.status === true) {
+          toast.success(
+            response?.data?.message || "Category created successfully!"
+          );
+          resetForm(values);
+          setImage(null);
+          navigate("/admin/category");
+        }
+      } catch (error) {
+        setError(error?.response?.data);
+        toast.error(error?.response?.data?.message || "Something went wrong!");
+      }
     },
   });
 
@@ -35,11 +57,15 @@ const AddCategory = () => {
   ];
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
-    reader.readAsDataURL(file);
+    if (file) {
+      formik.setFieldValue("image", file);
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
   return (
     <>
@@ -75,15 +101,11 @@ const AddCategory = () => {
                 Category Image
               </label>
               <input
-                onChange={(e) => {
-                  handleImageChange(e);
-                  formik.handleChange(e);
-                }}
-                accept="image/*"
+                onChange={handleImageChange}
+                accept="image/png, image/jpeg, image/jpg"
                 type="file"
                 id="image"
                 name="image"
-                value={formik.values.image}
                 className="mt-1 block w-full rounded-md transition duration-300 sm:text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
               />
               <ErrorMessage message={error?.errors?.image} />
