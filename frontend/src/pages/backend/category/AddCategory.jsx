@@ -19,9 +19,16 @@ const AddCategory = () => {
       image: null,
       description: "",
     },
+    // onSubmit: async (values, { resetForm }) => {
+    //   await fetchData(`${apiUrl}/categories`, "POST", values);
+    //   resetForm(values);
+    //   setImage("");
+    // },
     onSubmit: async (values, { resetForm }) => {
       const formData = new FormData();
       formData.append("name", values.name);
+
+
       formData.append("image", values.image);
       formData.append("description", values.description);
       try {
@@ -42,6 +49,7 @@ const AddCategory = () => {
         setError(error?.response?.data);
         toast.error(error?.response?.data?.message || "Something went wrong!");
       }
+
     },
   });
 
@@ -93,7 +101,7 @@ const AddCategory = () => {
                 autoFocus
               />
             </div>
-            <div className="">
+            {/* <div className="">
               <label
                 htmlFor="image"
                 className="block text-sm font-medium text-gray-900 mb-3"
@@ -103,6 +111,27 @@ const AddCategory = () => {
               <input
                 onChange={handleImageChange}
                 accept="image/png, image/jpeg, image/jpg"
+                type="file"
+                id="image"
+                name="image"
+                className="mt-1 block w-full rounded-md transition duration-300 sm:text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+              />
+              <ErrorMessage message={error?.errors?.image} />
+            </div> */}
+
+            {/* Image Upload */}
+            <div>
+              <label
+                htmlFor="image"
+                className="block text-sm font-medium text-gray-900 mb-3"
+              >
+                Category Image
+              </label>
+              <input
+                onChange={(e) => {
+                  handleImageChange(e);
+                }}
+                accept="image/*"
                 type="file"
                 id="image"
                 name="image"

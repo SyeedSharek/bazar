@@ -25,8 +25,8 @@ class StorecategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:categories|min:3',
-            'image' => 'required|mimes:jpg,jpeg,png',
-            'description' => 'nullable|min:5',
+            'image' => 'required',
+            'description' => 'nullable',
         ];
     }
 
