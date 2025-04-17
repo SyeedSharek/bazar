@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
@@ -8,12 +8,21 @@ const apiUrl = import.meta.env.VITE_BACKEND_API;
 import useFetch from "./../../../hooks/customHooks/useFetch";
 import { toast } from "react-hot-toast";
 import BreadCrumb from "../../../components/BreadCrumb";
+import { LiaTrashAltSolid } from "react-icons/lia";
+import { BiEdit } from "react-icons/bi";
 
 const Category = () => {
-  const { data, isLoading, error } = useFetch(
-    `${apiUrl}/categories?paginate=15`
-  );
-
+  const { fetchData, deleteData, data, isLoading, error } = useFetch();
+  useEffect(() => {
+    fetchData(`${apiUrl}/categories?paginate=10`);
+  }, [apiUrl]);
+  const handleDelete = async (id) => {
+    deleteData(`${apiUrl}/categories/${id}`);
+    if (data?.status === true) {
+      toast.success(data?.message || "Category deleted successfully!");
+      fetchData(`${apiUrl}/categories?paginate=10`);
+    }
+  };
   if (error) {
     toast.error(error);
   }
@@ -72,7 +81,7 @@ const Category = () => {
           </thead>
           <tbody className="min-h-[50vh] overflow-y-auto">
             {!isLoading &&
-              data?.data?.data?.data.map((item, index) => (
+              data?.data?.data.map((item, index) => (
                 <tr
                   key={index}
                   className="bg-white border-b border-gray-200 hover:bg-gray-50 "
@@ -92,13 +101,21 @@ const Category = () => {
                   </td>
                   <td className="px-6 py-4">{item.status}</td>
                   <td className="px-6 py-4 line-clamp-1">{item.description}</td>
-                  <td className="px-6 py-4 text-right">
-                    <a
-                      href="#"
-                      className="font-medium text-blue-600 hover:underline"
-                    >
-                      Edit
-                    </a>
+                  <td className="px-6 py-4 ">
+                    <div className="inline-flex gap-3">
+                      <a
+                        href="#"
+                        className="font-medium text-blue-600 hover:underline"
+                      >
+                        <BiEdit size={25} />
+                      </a>
+                      <button
+                        className="font-medium text-red-600 hover:underline cursor-pointer"
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        <LiaTrashAltSolid size={25} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
