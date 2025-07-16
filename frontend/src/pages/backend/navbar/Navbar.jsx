@@ -6,8 +6,10 @@ import Input from "../../../components/Input";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { BsCart2 } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   return (
     <div className="sticky top-0 z-50 bg-primary-light w-full h-[80px] mt-0 flex gap-16 text-gray-800 justify-between items-center px-6">
       <div className="text-2xl font-bold font-outfit">Overview</div>
@@ -23,7 +25,10 @@ export default function Navbar() {
         <IoMdNotificationsOutline size={22} />
         <BsCart2 />
         <Profile />
-        <button className="flex gap-4 items-center text-sm bg-primary rounded-lg text-nowrap px-4 py-2 text-white">
+        <button
+          className="flex gap-4 items-center text-sm bg-primary rounded-lg text-nowrap px-4 py-2 text-white cursor-pointer"
+          onClick={() => navigate("/admin/add-product")}
+        >
           <MdOutlineAddCircleOutline size={18} /> Add Product
         </button>
       </div>

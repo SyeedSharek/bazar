@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useSearchParams } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import PrimaryButton from "../../../components/ui/buttons/PrimaryButton";
@@ -10,16 +10,25 @@ import { toast } from "react-hot-toast";
 import BreadCrumb from "../../../components/BreadCrumb";
 import { LiaTrashAltSolid } from "react-icons/lia";
 import { BiEdit } from "react-icons/bi";
+import { Pagination } from "../../../components/Pagination";
 
 const Category = () => {
   const { fetchData, deleteData, data, isLoading, error } = useFetch();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const page = searchParams.get("page") || 1;
   useEffect(() => {
-    fetchData(`${apiUrl}/categories?paginate=10`);
-  }, [apiUrl]);
+    fetchData(`${apiUrl}/categories?paginate=10&page=${page}`);
+  }, [page]);
+
+  const handlePageChange = (url) => {
+    const params = new URLSearchParams(url.split("?")[1]);
+    const page = params.get("page") || 1;
+    setSearchParams({ page });
+  };
   const handleDelete = async (id) => {
     deleteData(`${apiUrl}/categories/${id}`);
     if (data?.status === true) {
-      toast.success(data?.message || "Category deleted successfully!");
       fetchData(`${apiUrl}/categories?paginate=10`);
     }
   };
@@ -36,7 +45,7 @@ const Category = () => {
   return (
     <>
       <BreadCrumb data={breadCrumbs} />
-      <div className="relative overflow-y-auto shadow-md sm:rounded-lg my-8 container mx-auto">
+      <div className="relative overflow-y-auto sm:rounded-lg my-8 container mx-auto">
         <div className="py-4 px-4 bg-white rounded-xl my-4 flex justify-between items-center">
           <div>
             <p className="font-poppins font-semibold text-2xl"> Category</p>
@@ -103,12 +112,12 @@ const Category = () => {
                   <td className="px-6 py-4 line-clamp-1">{item.description}</td>
                   <td className="px-6 py-4 ">
                     <div className="inline-flex gap-3">
-                      <a
-                        href="#"
-                        className="font-medium text-blue-600 hover:underline"
+                      <Link
+                        className="font-medium text-blue-600 hover:underline cursor-pointer"
+                        to={`/admin/edit-category/${item.id}`}
                       >
                         <BiEdit size={25} />
-                      </a>
+                      </Link>
                       <button
                         className="font-medium text-red-600 hover:underline cursor-pointer"
                         onClick={() => handleDelete(item.id)}
@@ -121,6 +130,20 @@ const Category = () => {
               ))}
           </tbody>
         </table>
+        <div className="flex gap-3 items-center mt-4">
+          {data?.data?.links?.map((link, index) => (
+            <button
+              key={index}
+              disabled={!link.url}
+              onClick={() => handlePageChange(link.url)}
+              className={`px-3 py-1 ${
+                link.active ? "bg-primary text-white" : "bg-white text-black"
+              } rounded-lg`}
+            >
+              <span dangerouslySetInnerHTML={{ __html: link.label }} />
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );
