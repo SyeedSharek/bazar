@@ -27,12 +27,9 @@ import AddCategory from "../pages/backend/category/AddCategory";
 
 import SubCategoryProductPage from "../pages/frontend/product/filter_product/SubCategoryProductPage";
 
-
-
-
 import Product from "../pages/backend/product/Product";
 import AddProduct from "../pages/backend/product/AddProduct";
-
+import EditCategory from "../pages/backend/category/EditCategory";
 
 export const Router = () => {
   const location = useLocation();
@@ -45,9 +42,11 @@ export const Router = () => {
         {/* <Route index element={<App />} /> */}
         <Route path="/*" element={<App />}>
           <Route path="*" element={<NotFound />} />
-         
-           <Route path="subcategory-products/:subCategoryId" element={<SubCategoryProductPage />} />
 
+          <Route
+            path="subcategory-products/:subCategoryId"
+            element={<SubCategoryProductPage />}
+          />
 
           <Route index element={<FrontDashboard />} />
           <Route path="about" element={<About />} />
@@ -67,12 +66,9 @@ export const Router = () => {
 
           <Route path="single_product/:id" element={<SingleProduct />} />
 
-          <Route path="all_product" element={<All_Product /> } />
-
-
+          <Route path="all_product" element={<All_Product />} />
 
           <Route path="cart" element={<Add_To_Cart />} />
-
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="forget-password" element={<ForgetPassword />} />
@@ -83,13 +79,11 @@ export const Router = () => {
           <Route index path="dashboard" element={<Dashboard />} />
           <Route path="category" element={<Category />} />
           <Route path="add-category" element={<AddCategory />} />
+          <Route path="edit-category/:id" element={<EditCategory />} />
           <Route path="subCategory" element={<SubCategory />} />
-
-
 
           <Route path="product" element={<Product />} />
           <Route path="add-product" element={<AddProduct />} />
-
         </Route>
 
         {/* Frontend Router  */}

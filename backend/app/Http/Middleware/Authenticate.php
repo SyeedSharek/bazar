@@ -26,7 +26,7 @@ class Authenticate
         } catch (TokenExpiredException $e) {
             return response()->json(['status' => false, 'message' => 'Your token has expired. Please refresh.'], 401);
         } catch (TokenInvalidException $e) {
-            return response()->json(['status' => false, 'message' => "Token didn't match"], 401);
+            return response()->json(['status' => false, 'message' => "Token didn't match " . $e->getMessage()], 401);
         } catch (JWTException $e) {
             return response()->json(['status' => false, 'message' => 'Token not provided.'], 401);
         }

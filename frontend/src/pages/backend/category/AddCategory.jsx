@@ -4,15 +4,13 @@ import PrimaryButton from "../../../components/ui/buttons/PrimaryButton";
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 import { useFormik } from "formik";
 import ErrorMessage from "../../../components/ErrorMessage";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useFetch from "../../../hooks/customHooks/useFetch";
 
 const AddCategory = () => {
+  const { submitData, isLoading, error } = useFetch();
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
-  const token = localStorage.getItem("token");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -24,23 +22,11 @@ const AddCategory = () => {
       formData.append("name", values.name);
       formData.append("image", values.image);
       formData.append("description", values.description);
-      try {
-        const response = await axios.post(`${apiUrl}/categories`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response?.data?.status === true) {
-          toast.success(
-            response?.data?.message || "Category created successfully!"
-          );
-          resetForm(values);
-          setImage(null);
-          navigate("/admin/category");
-        }
-      } catch (error) {
-        setError(error?.response?.data);
-        toast.error(error?.response?.data?.message || "Something went wrong!");
+      const res = await submitData(`${apiUrl}/categories`, formData);
+      console.log(res);
+      if (res?.status === true) {
+        resetForm();
+        navigate("/admin/category");
       }
     },
   });
@@ -92,6 +78,7 @@ const AddCategory = () => {
                 value={formik.values.name}
                 autoFocus
               />
+              <ErrorMessage message={error?.errors?.name} />
             </div>
             <div className="">
               <label
@@ -125,6 +112,7 @@ const AddCategory = () => {
                 onChange={formik.handleChange}
                 className="mt-1 py-2 px-2 block w-full rounded-md focus:outline-none transition duration-300 focus:shadow border focus:border-indigo-400 sm:text-sm"
               ></textarea>
+              <ErrorMessage message={error?.errors?.description} />
             </div>
             {image && (
               <div className="">
@@ -140,7 +128,7 @@ const AddCategory = () => {
             )}
           </div>
           <PrimaryButton type="submit" className="mt-4">
-            Create Category
+            {isLoading ? "Creating..." : "Create Category"}
           </PrimaryButton>
         </form>
       </div>
